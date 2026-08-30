@@ -18,6 +18,24 @@
 
 ---
 
+## 🧬 Supported 23andMe Chip Versions & File Formats
+
+iGenetic includes automated dual-layer detection and coordinate harmonization for all generations of 23andMe microarray arrays:
+
+| Chip Version | Release Era | Microarray Hardware | Number of SNPs | Reference Genome | Support Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **23andMe v5** | 2017 – Present | Illumina Global Screening Array (GSA) | ~640,000 | **GRCh38 / hg38** | ✅ Full Native Support |
+| **23andMe v4** | 2013 – 2017 | Illumina HumanOmniExpress-24 | ~570,000 | **GRCh37 / hg19** | ✅ Full Native Support |
+| **23andMe v3** | 2010 – 2013 | Illumina OmniExpress+ | ~950,000 | **GRCh37 / hg19** | ✅ Full Native Support |
+| **23andMe v2 / v1** | 2007 – 2010 | Illumina HumanHap550+ | ~550,000 | **NCBI36 / hg18** | ✅ Full Native Support |
+
+### How Chip Discrepancies Are Handled:
+1. **Dual-Layer Auto-Detection:** Reads header metadata comments or falls back to diagnostic probe fingerprint sets (`CHIP_FINGERPRINTS`) if headers were stripped.
+2. **Missing Probe Imputation (1000 Genomes Project):** If an older or newer chip generation lacks a specific SNP required by a Polygenic Risk Score (PRS) model, the engine uses ancestry reference allele frequencies to frequency-impute the missing contribution without bias.
+3. **Multi-Format Ingestion:** Directly accepts uncompressed (`.txt`, `.tsv`, `.csv`), standard ZIP archives (`.zip` as downloaded from 23andMe), and GZIP archives (`.gz`, `.tar.gz`). Decompression occurs entirely in client RAM.
+
+---
+
 ## 🔬 Why iGenetic? (iGenetic vs. Standard 23andMe App)
 
 Direct-to-consumer genetic testing companies operate under strict **FDA 510(k) Premarket Approval** constraints. As a result, the commercial consumer app is legally restricted from showing comprehensive polygenic risk scores across unapproved diseases, granular star-allele drug dosing protocols, or monogenic carrier annotations across adult-onset conditions.
