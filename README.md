@@ -56,20 +56,28 @@ Direct-to-consumer genetic testing companies operate under strict **FDA 510(k) P
 
 The Polygenic Risk Score combines additive effect sizes across directly genotyped variants on the microarray chip, while using **1000 Genomes Project (Phase 3)** ancestry reference allele frequencies to impute missing markers without bias:
 
-$$\text{PRS}_{\text{raw}} = \sum_{j \in \text{Observed}} \left( \beta_j \cdot G_j \right) + \sum_{k \in \text{Missing}} \left( \beta_k \cdot 2 \cdot f_k \right)$$
+```math
+\mathrm{PRS}_{\mathrm{raw}} = \sum_{j \in \mathrm{Observed}} (\beta_j \cdot G_j) + \sum_{k \in \mathrm{Missing}} (\beta_k \cdot 2 \cdot f_k)
+```
 
 * $G_j \in \{0, 1, 2\}$: Count of effect alleles at directly genotyped variant $j$.
-* $\beta_j$: Per-allele effect size (log odds ratio $\ln(\text{OR})$ or linear regression beta) derived from primary GWAS discovery meta-analyses.
+* $\beta_j$: Per-allele effect size (log odds ratio $\ln(\mathrm{OR})$ or linear regression beta) derived from primary GWAS discovery meta-analyses.
 * $f_k$: Ancestry-matched reference effect-allele frequency for missing probe $k$.
 
 #### Standardization & Percentile Mapping
-Raw scores are normalized against ancestry-specific reference distributions ($\mu_{\text{pop}}$, $\sigma_{\text{pop}}$) across 5 continental populations (European `EUR`, African `AFR`, East Asian `EAS`, South Asian `SAS`, Admixed American `AMR`):
+Raw scores are normalized against ancestry-specific reference distributions ($\mu_{\mathrm{pop}}$, $\sigma_{\mathrm{pop}}$) across 5 continental populations (European `EUR`, African `AFR`, East Asian `EAS`, South Asian `SAS`, Admixed American `AMR`):
 
-$$Z = \frac{\text{PRS}_{\text{raw}} - \mu_{\text{pop}}}{\sigma_{\text{pop}}}$$
+```math
+Z = \frac{\mathrm{PRS}_{\mathrm{raw}} - \mu_{\mathrm{pop}}}{\sigma_{\mathrm{pop}}}
+```
 
-$$\text{Percentile} = \Phi(Z) \times 100 = \left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{Z} e^{-t^2/2} \, dt \right) \times 100$$
+```math
+\mathrm{Percentile} = \Phi(Z) \times 100 = \left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{Z} e^{-t^2/2} \, dt \right) \times 100
+```
 
-$$\text{Relative Risk (RR)} = e^{\beta_{\text{per\_SD}} \cdot Z}$$
+```math
+\mathrm{Relative\ Risk\ (RR)} = e^{\beta_{\mathrm{SD}} \cdot Z}
+```
 
 ---
 
