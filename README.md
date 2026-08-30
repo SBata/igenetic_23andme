@@ -1,1 +1,130 @@
-# igenetic_23andme
+# iGenetic PRO | Research-Grade 23andMe Re-Analysis Platform
+
+[![Next.js 14](https://img.shields.io/badge/Next.js-14.2.24-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+[![Privacy](https://img.shields.io/badge/Privacy-100%25%20Zero--Knowledge%20Client%20RAM-emerald)](https://github.com/)
+
+**iGenetic** is an open-source, zero-knowledge computational genomics platform designed to re-analyze raw direct-to-consumer (DTC) microarray DNA exports (23andMe v2, v3, v4, and v5 chip arrays) with research-grade clinical rigor directly inside your web browser.
+
+---
+
+## 🔬 Why iGenetic? (iGenetic vs. Standard 23andMe App)
+
+Direct-to-consumer genetic testing companies operate under strict **FDA 510(k) Premarket Approval** constraints. As a result, the commercial consumer app is legally restricted from showing comprehensive polygenic risk scores across unapproved diseases, granular star-allele drug dosing protocols, or monogenic carrier annotations across adult-onset conditions.
+
+| Feature | Standard 23andMe Consumer App | iGenetic Research Engine |
+| :--- | :--- | :--- |
+| **Polygenic Risk Scores (PRS)** | Limited traits behind subscription paywalls; opaque proprietary algorithms. | Full multi-ancestry **PGS Catalog** models with explicit log-odds weights, 1000 Genomes imputation, and Z-score distributions. |
+| **Pharmacogenomics (PGx)** | Only 2–3 FDA-cleared genes (*CYP2C19*) with high-level descriptions. | Full **CPIC Level A/B** star-allele calling across *CYP2C19*, *SLCO1B1*, *VKORC1*, and *DPYD* with clinical dosing guidelines. |
+| **ClinVar Pathogenic Mutations** | Hidden or filtered out due to FDA monogenic liability regulations. | Surgically queries **NIH ClinVar 2+ star** peer-reviewed consensus mutations with clear asymptomatic carrier vs. affected status. |
+| **Universal Variant Search** | Raw Data viewer shows only base letters (e.g. "AA") with zero biological context. | **Live Ensembl & NCBI dbSNP REST** integration translating ANY typed rsID into transcript consequence, MAF, and literature. |
+| **Data Privacy & Airgap** | DNA stored on corporate cloud servers subject to commercial terms. | **100% Zero-Knowledge in-browser Web Workers**. DNA never leaves your device RAM. |
+
+---
+
+## 📐 Mathematical & Algorithmic Methodology
+
+### 1. Polygenic Risk Score (PRS) Formulation
+
+The Polygenic Risk Score combines additive effect sizes across directly genotyped variants on the microarray chip, while using **1000 Genomes Project (Phase 3)** ancestry reference allele frequencies to impute missing markers without bias:
+
+$$\text{PRS}_{\text{raw}} = \sum_{j \in \text{Observed}} \left( \beta_j \cdot G_j \right) + \sum_{k \in \text{Missing}} \left( \beta_k \cdot 2 \cdot f_k \right)$$
+
+* $G_j \in \{0, 1, 2\}$: Count of effect alleles at directly genotyped variant $j$.
+* $\beta_j$: Per-allele effect size (log odds ratio $\ln(\text{OR})$ or linear regression beta) derived from primary GWAS discovery meta-analyses.
+* $f_k$: Ancestry-matched reference effect-allele frequency for missing probe $k$.
+
+#### Standardization & Percentile Mapping
+Raw scores are normalized against ancestry-specific reference distributions ($\mu_{\text{pop}}$, $\sigma_{\text{pop}}$) across 5 continental populations (European `EUR`, African `AFR`, East Asian `EAS`, South Asian `SAS`, Admixed American `AMR`):
+
+$$Z = \frac{\text{PRS}_{\text{raw}} - \mu_{\text{pop}}}{\sigma_{\text{pop}}}$$
+
+$$\text{Percentile} = \Phi(Z) \times 100 = \left( \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{Z} e^{-t^2/2} \, dt \right) \times 100$$
+
+$$\text{Relative Risk (RR)} = e^{\beta_{\text{per\_SD}} \cdot Z}$$
+
+---
+
+### 2. Pharmacogenomics (CPIC / PharmGKB) Star-Allele Calling
+
+iGenetic translates observed SNP genotypes in key phase I/II drug-metabolizing enzymes and transporters into standard star (\*)-allele diplotypes following guidelines from the **Clinical Pharmacogenetics Implementation Consortium (CPIC)** and **PharmGKB**:
+
+* **`CYP2C19` (Clopidogrel, SSRIs, PPIs):** Calls \*1 (wild-type), \*2 (rs4244285 loss-of-function 681G>A), \*3 (rs4986893 stop codon), and \*17 (rs12248560 promoter gain-of-function -806C>T). Sums activity scores to categorize Poor (0), Intermediate (0.5–1.0), Normal (1.5–2.0), Rapid (2.5), or Ultra-Rapid (3.0) metabolizers.
+* **`SLCO1B1` (Statin Myopathy Risk):** Calls the \*5 allele (rs4149056 521T>C Val174Ala). Carrying 1 or 2 copies reduces hepatic OATP1B1 transporter function, elevating systemic statin concentrations (Simvastatin / Atorvastatin) and increasing rhabdomyolysis risk.
+* **`VKORC1` (Warfarin Sensitivity):** Calls the -1639G>A promoter polymorphism (rs9923231). The 'A' allele reduces VKORC1 enzyme transcription, requiring lower maintenance warfarin doses.
+* **`DPYD` (Fluoropyrimidine Toxicity):** Screens for DPYD \*2A (rs3918290 c.1905+1G>A splice site) and c.2846A>T (rs67376798) to prevent lethal 5-FU and Capecitabine toxicity.
+
+---
+
+### 3. Monogenic Mutation Screening (ClinVar Consensus)
+
+* **Strict $\ge 2$ Star Review Threshold:** Filters only variants submitted with consensus across multiple clinical genetic testing laboratories, expert panels (ClinGen), or practice guidelines.
+* **Carrier Disambiguation:** Differentiates Autosomal Dominant (affected with 1 copy) from Autosomal Recessive Carrier (healthy, asymptomatic with 1 copy, e.g. *HFE* C282Y Hemochromatosis, *SERPINA1* Alpha-1 Antitrypsin, *CFTR* Cystic Fibrosis).
+
+---
+
+### 4. Microarray Quality Control & Assembly Liftover
+
+* **Transition/Transversion Ratio ($Ti/Tv$):** Computes Transitions ($A \leftrightarrow G$, $C \leftrightarrow T$) vs. Transversions ($A \leftrightarrow C$, $A \leftrightarrow T$, $C \leftrightarrow G$, $G \leftrightarrow T$). Expected whole-genome microarray ratio is $\approx 2.05 - 2.20$.
+* **Probe Call Rate:** Flags samples with $<98.0\%$ call rate for potential DNA degradation.
+* **GRCh38 Liftover:** Older 23andMe files (v2/v3/v4) anchored to NCBI36/GRCh37 are dynamically mapped to canonical GRCh38 coordinates.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* [Node.js](https://nodejs.org/) v18.0.0 or higher
+* npm / yarn / pnpm
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/SBata/igenetic_23andme.git
+   cd igenetic_23andme
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000).
+
+5. **Production Build:**
+   ```bash
+   npm run build
+   npm start
+   ```
+
+---
+
+## 🔒 Zero-Knowledge Privacy Architecture
+
+* **100% In-Browser Execution:** DNA decompression, chunked parsing, and mathematical modeling run entirely in client Web Workers and JavaScript memory.
+* **Zero Network Transmission:** No genetic data is ever transmitted to any remote backend server.
+* **Volatile Session Storage:** Results persist in local `sessionStorage` during your active browser tab and are wiped when the tab is closed.
+
+---
+
+## 📚 Primary Scientific References
+
+1. **Polygenic Score Catalog:** Lambert et al., *The Polygenic Score Catalog: an open database for reproducibility and systematic evaluation.* **Nature Genetics** 53, 565–572 (2021). [pgscatalog.org](https://www.pgscatalog.org/)
+2. **CPIC Guidelines:** Relling & Klein, *CPIC: Clinical Pharmacogenetics Implementation Consortium of the Pharmacogenomics Research Network.* **Clin Pharmacol Ther.** 89(3):464-7 (2011). [cpicpgx.org](https://cpicpgx.org/)
+3. **ClinVar Database:** Landrum et al., *ClinVar: improving access to variant interpretations and supporting evidence.* **Nucleic Acids Res.** 46(D1):D1062-D1067 (2018). [ncbi.nlm.nih.gov/clinvar](https://www.ncbi.nlm.nih.gov/clinvar/)
+4. **1000 Genomes Project:** 1000 Genomes Project Consortium, *A global reference for human genetic variation.* **Nature** 526, 68–74 (2015).
+5. **Ensembl Variation:** Cunningham et al., *Ensembl 2022.* **Nucleic Acids Res.** 50(D1):D988-D995 (2022).
+
+---
+
+## ⚖️ Disclaimer
+
+iGenetic is a computational genomics re-analysis platform built for personal research, education, and exploratory purposes. It is **not** a clinical diagnostic medical device. Never start, discontinue, or modify prescription medications or clinical care without consulting a board-certified physician or genetic counselor.
