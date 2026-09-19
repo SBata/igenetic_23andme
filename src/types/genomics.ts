@@ -1,4 +1,4 @@
-export type Build = 'GRCh37' | 'GRCh38';
+export type Build = 'NCBI36' | 'GRCh37' | 'GRCh38' | 'Unknown';
 
 export type ChipVersion = 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'Unknown';
 
@@ -21,7 +21,7 @@ export interface GenotypeSampleQC {
   hetHomRatio: number;
   transitionsCount: number;
   transversionsCount: number;
-  titvRatio: number;
+  titvRatio: number | null;
   detectedChip: ChipVersion;
   detectedBuild: Build;
   parsedAt: string;
@@ -50,6 +50,9 @@ export type MetabolizerStatus =
   | 'Indeterminate';
 
 export interface PGxGeneReport {
+  status: 'unavailable';
+  reason: string;
+  observations: VariantObservation[];
   gene: string;
   diplotype: string;
   phenotype: MetabolizerStatus;
@@ -100,36 +103,35 @@ export interface PRSCatalogModel {
 }
 
 export interface PRSResult {
+  status: 'complete' | 'partial' | 'unavailable';
+  reason: string;
   modelId: string;
   traitName: string;
   category: string;
-  publication: string;
-  pubmedId: string;
-  rawScore: number;
-  observedScore: number;
-  imputedScore: number;
+  rawScore: number | null;
+  observedScore: number | null;
+  contributions: import('../lib/scoring').Contribution[];
+  source: string;
+  citation: string;
+  sourceFiles: { build: string; filename: string; sha256: string }[];
+  imputedScore: null;
   totalVariantsInModel: number;
   observedVariantsCount: number;
   imputedVariantsCount: number;
   coveragePercentage: number;
-  reliabilityTier: 'High' | 'Moderate' | 'Caution - Low Coverage';
+  reliabilityTier: 'Unvalidated';
   percentiles: {
     [population: string]: number;
   };
-  relativeRisk: number;
-  riskTier: 'Below Average' | 'Average' | 'Elevated' | 'Significantly Elevated';
-  variantBreakdown: {
-    rsid: string;
-    gene: string;
-    consequence: string;
-    biologicalMechanism: string;
-    genotype: string;
-    effectAllele: string;
-    weight: number;
-    isObserved: boolean;
-    imputedValue?: number;
-    contribution: number;
-  }[];
+  relativeRisk: null;
+  riskTier: 'Unavailable';
+  variantBreakdown: VariantObservation[];
+}
+
+export interface VariantObservation {
+  rsid: string;
+  genotype: string | null;
+  status: 'observed' | 'missing' | 'uncalled';
 }
 
 // ClinVar Types
@@ -169,13 +171,19 @@ export interface GWASTrait {
   };
 }
 
-export interface GWASTraitResult extends GWASTrait {
+export interface GWASTraitResult {
+  source: string;
+  rsid: string;
+  gene: string;
+  trait: string;
   patientGenotype: string;
   userInterpretation: string;
-  hasEffectAllele: boolean;
 }
 
 export interface FullAnalysisResult {
+  schemaVersion: 3;
+  isDemo: boolean;
+  clinicalStatus: 'unavailable';
   qc: GenotypeSampleQC;
   pgx: PGxGeneReport[];
   prs: PRSResult[];

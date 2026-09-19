@@ -25,6 +25,14 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.*
+!.env.example
+genome_*
+*23andMe*.txt
+*23andMe*.zip
+igenetic-observations*.json
+/private-data/
 
 # vercel
 .vercel
@@ -32,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local regression build
+/.test-build/

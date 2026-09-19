@@ -1,103 +1,77 @@
-import { FullAnalysisResult, RawVariant } from '@/types/genomics';
-import { unzipSync, gunzipSync, strFromU8 } from 'fflate';
+import type { FullAnalysisResult, RawVariant } from '@/types/genomics';
+import { unzipSync } from 'fflate';
 import { detectChipAndBuild, performSampleQC } from './qc';
 import { runFullGenomicAnalysis } from './engine';
 
 export interface ParseProgressCallback {
   (stage: 'reading' | 'decompressing' | 'parsing' | 'qc' | 'analyzing' | 'done', percent: number): void;
 }
+const MAX_INPUT_BYTES = 32 * 1024 * 1024;
+const MAX_TEXT_BYTES = 128 * 1024 * 1024;
+const MAX_MARKERS = 1_500_000;
 
-export async function parseAndAnalyze23andMeFile(
-  file: File,
-  onProgress?: ParseProgressCallback
-): Promise<FullAnalysisResult> {
-  onProgress?.('reading', 10);
-  const arrayBuffer = await file.arrayBuffer();
-  const uint8 = new Uint8Array(arrayBuffer);
-
-  let textContent = '';
-
-  // 1. Check if file is a zip archive (Magic bytes: PK\x03\x04 -> 0x50, 0x4B, 0x03, 0x04)
-  if (uint8.length >= 4 && uint8[0] === 0x50 && uint8[1] === 0x4b && uint8[2] === 0x03 && uint8[3] === 0x04) {
-    onProgress?.('decompressing', 25);
-    await new Promise(resolve => setTimeout(resolve, 10));
-    const unzipped = unzipSync(uint8);
-    // Find first text file inside zip
-    const textFileName = Object.keys(unzipped).find(name => 
-      !name.startsWith('__MACOSX') && 
-      !name.startsWith('.') &&
-      (name.endsWith('.txt') || name.endsWith('.tsv') || name.endsWith('.csv') || !name.includes('.'))
-    );
-    if (!textFileName || !unzipped[textFileName]) {
-      throw new Error('No valid 23andMe genotype text file found inside the zip archive.');
-    }
-    textContent = strFromU8(unzipped[textFileName]);
-  } 
-  // 2. Check if file is a GZIP archive (Magic bytes: 0x1F, 0x8B)
-  else if (uint8.length >= 2 && uint8[0] === 0x1f && uint8[1] === 0x8b) {
-    onProgress?.('decompressing', 25);
-    await new Promise(resolve => setTimeout(resolve, 10));
-    const decompressed = gunzipSync(uint8);
-    textContent = strFromU8(decompressed);
-  } 
-  // 3. Raw text file
-  else {
-    onProgress?.('reading', 25);
-    const decoder = new TextDecoder('utf-8');
-    textContent = decoder.decode(uint8);
-  }
-
-  onProgress?.('parsing', 45);
-  await new Promise(resolve => setTimeout(resolve, 10));
-
-  const lines = textContent.split(/\r?\n/);
+export function parse23andMeText(text: string): { headerLines: string[]; variants: RawVariant[] } {
   const headerLines: string[] = [];
   const variants: RawVariant[] = [];
-  const rsidSet = new Set<string>();
-
-  const totalLines = lines.length;
-
-  for (let i = 0; i < totalLines; i++) {
-    const line = lines[i].trim();
+  const ids = new Set<string>();
+  for (const [index, source] of text.split(/\r?\n/).entries()) {
+    const line = source.trim();
     if (!line) continue;
-
-    if (line.startsWith('#')) {
-      if (headerLines.length < 100) {
-        headerLines.push(line);
-      }
-      continue;
+    if (line.startsWith('#')) { if (headerLines.length < 100) headerLines.push(line); continue; }
+    if (/^rsid[\s,]+chromosome[\s,]+position[\s,]+genotype$/i.test(line)) continue;
+    const parts = line.split(/[\s,]+/).map(part => part.replace(/^"(.*)"$/, '$1'));
+    const [id, chromosome, positionText, genotype] = parts;
+    const rsid = id?.toLowerCase();
+    const chr = chromosome?.toUpperCase().replace(/^CHR/, '');
+    const gt = genotype?.toUpperCase();
+    const position = Number(positionText);
+    if (parts.length !== 4 || !/^(?:rs\d+|i\d+)$/.test(rsid || '') ||
+        !/^(?:[1-9]|1[0-9]|2[0-2]|X|Y|XY|MT|M)$/.test(chr || '') ||
+        !/^\d+$/.test(positionText || '') || !Number.isSafeInteger(position) || position <= 0 ||
+        !/^(?:[ACGT]{1,2}|[ID]{1,2}|--|__|\?\?|00|NN)$/.test(gt || '')) {
+      throw new Error(`Unrecognized genotype row at line ${index + 1}. Select an unmodified 23andMe export.`);
     }
-
-    // Split on whitespace or tab or comma
-    const parts = line.split(/[\s,\t]+/);
-    if (parts.length >= 4) {
-      const rsid = parts[0];
-      const chromosome = parts[1];
-      const position = parseInt(parts[2], 10);
-      const genotype = parts[3];
-
-      if (rsid && !isNaN(position)) {
-        variants.push({ rsid, chromosome, position, genotype });
-        rsidSet.add(rsid.toLowerCase());
-      }
-    }
+    if (ids.has(rsid)) throw new Error(`Duplicate marker at line ${index + 1}. Use a single, unmodified export.`);
+    ids.add(rsid);
+    variants.push({ rsid, chromosome: chr === 'M' ? 'MT' : chr, position, genotype: gt });
+    if (variants.length > MAX_MARKERS) throw new Error('This file exceeds the supported 1.5 million marker limit.');
   }
+  if (!variants.length) throw new Error('No genotype rows found. Select a 23andMe raw data text file or ZIP.');
+  return { headerLines, variants };
+}
 
-  if (variants.length === 0) {
-    throw new Error('No genomic variant lines could be parsed from this file. Ensure it is an authentic 23andMe raw data export.');
+export async function parseAndAnalyze23andMeFile(file: File, onProgress?: ParseProgressCallback): Promise<FullAnalysisResult> {
+  if (!file.size || file.size > MAX_INPUT_BYTES) throw new Error('Choose a non-empty file smaller than 32 MB.');
+  onProgress?.('reading', 10);
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  let text: string;
+  if (bytes[0] === 0x50 && bytes[1] === 0x4b) {
+    onProgress?.('decompressing', 25);
+    let totalSize = 0;
+    let entries = 0;
+    const archive = unzipSync(bytes, { filter: entry => {
+      if (++entries > 100) throw new Error('The ZIP contains too many entries. Select the original export.');
+      const eligible = !entry.name.startsWith('__MACOSX/') && !entry.name.split('/').some(p => p.startsWith('.')) && /\.(txt|tsv|csv)$/i.test(entry.name);
+      if (eligible) totalSize += entry.originalSize;
+      if (totalSize > MAX_TEXT_BYTES) throw new Error('The expanded ZIP exceeds the 128 MB limit.');
+      return eligible;
+    } });
+    const files = Object.values(archive);
+    if (files.length !== 1) throw new Error('The ZIP must contain exactly one genotype text file. Extract it and select that file.');
+    text = new TextDecoder('utf-8', { fatal: true }).decode(files[0]);
+  } else {
+    if (bytes[0] === 0x1f && bytes[1] === 0x8b) throw new Error('GZIP and TAR archives are not supported. Extract the genotype text file first.');
+    text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
   }
-
+  onProgress?.('parsing', 45);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const { headerLines, variants } = parse23andMeText(text);
   onProgress?.('qc', 75);
-  await new Promise(resolve => setTimeout(resolve, 10));
-
-  const { chip, build } = detectChipAndBuild(headerLines, rsidSet);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const { chip, build } = detectChipAndBuild(headerLines, new Set(variants.map(v => v.rsid)));
   const qc = performSampleQC(variants, chip, build, file.name, file.size);
-
   onProgress?.('analyzing', 90);
-  await new Promise(resolve => setTimeout(resolve, 10));
-
-  const analysis = runFullGenomicAnalysis(variants, qc);
-
+  const result = runFullGenomicAnalysis(variants, qc);
   onProgress?.('done', 100);
-  return analysis;
+  return result;
 }

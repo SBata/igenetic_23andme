@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": false,
+    "incremental": false,
+    "outDir": ".test-build",
+    "rootDir": "src",
+    "target": "ES2022"
+  },
+  "include": ["src/lib/**/*.ts", "src/types/**/*.ts"],
+  "exclude": ["node_modules", "src/lib/analyzeFile.ts", "src/lib/analysis.worker.ts"]
+}

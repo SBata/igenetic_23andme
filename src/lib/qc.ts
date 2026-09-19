@@ -1,146 +1,50 @@
-import { Build, ChipVersion, GenotypeSampleQC, RawVariant } from '@/types/genomics';
-import { CHIP_FINGERPRINTS, TRANSITIONS, TRANSVERSIONS } from './constants';
+import type { Build, ChipVersion, GenotypeSampleQC, RawVariant } from '@/types/genomics';
+import { TRANSITIONS, TRANSVERSIONS } from './constants';
 
-export function detectChipAndBuild(
-  headerLines: string[],
-  variantRsids: Set<string>
-): { chip: ChipVersion; build: Build } {
-  const headerCombined = headerLines.join('\n').toLowerCase();
-
-  // 1. Header-based detection
-  if (headerCombined.includes('build 38') || headerCombined.includes('grch38') || headerCombined.includes('hg38')) {
-    return { chip: 'v5', build: 'GRCh38' };
-  }
-  if (headerCombined.includes('build 37') || headerCombined.includes('grch37') || headerCombined.includes('hg19')) {
-    if (headerCombined.includes('v4') || variantRsids.has('rs28936678')) {
-      return { chip: 'v4', build: 'GRCh37' };
-    }
-    return { chip: 'v3', build: 'GRCh37' };
-  }
-  if (headerCombined.includes('build 36') || headerCombined.includes('hg18')) {
-    return { chip: 'v2', build: 'GRCh37' };
-  }
-
-  // 2. Probe set fingerprinting fallback
-  const v5Hits = CHIP_FINGERPRINTS.v5_specific_snps.filter(rs => variantRsids.has(rs)).length;
-  const v4Hits = CHIP_FINGERPRINTS.v4_specific_snps.filter(rs => variantRsids.has(rs)).length;
-  const v3Hits = CHIP_FINGERPRINTS.v3_specific_snps.filter(rs => variantRsids.has(rs)).length;
-
-  if (v5Hits >= 2) {
-    return { chip: 'v5', build: 'GRCh38' };
-  }
-  if (v4Hits >= 2) {
-    return { chip: 'v4', build: 'GRCh37' };
-  }
-  if (v3Hits >= 1) {
-    return { chip: 'v3', build: 'GRCh37' };
-  }
-
-  // Default assumption for 23andMe modern exports
-  return { chip: 'v5', build: 'GRCh38' };
+export function isCalledGenotype(genotype: string, chromosome: string): boolean {
+  const gt = genotype.toUpperCase().trim();
+  const chr = chromosome.toUpperCase().replace(/^CHR/, '');
+  return /^(?:[ACGT]{2}|[ID]{2})$/.test(gt) ||
+    (/^(X|Y|MT|M)$/.test(chr) && /^[ACGTID]$/.test(gt));
 }
 
-export function performSampleQC(
-  variants: RawVariant[],
-  detectedChip: ChipVersion,
-  detectedBuild: Build,
-  fileName: string,
-  fileSizeBytes: number
-): GenotypeSampleQC {
-  let validAutosomalCalls = 0;
-  let sexChromosomeCalls = 0;
-  let mitochondrialCalls = 0;
-  let noCallCount = 0;
-  let heterozygousCount = 0;
-  let homozygousCount = 0;
-  let transitionsCount = 0;
-  let transversionsCount = 0;
+export function detectChipAndBuild(headerLines: string[], _variantRsids: Set<string>): { chip: ChipVersion; build: Build } {
+  const header = headerLines.join('\n').toLowerCase();
+  const chipMatch = header.match(/\b(?:chip|array)(?:\s+version)?\s*[:=]?\s*v?([1-5])\b/);
+  const chip: ChipVersion = chipMatch ? `v${chipMatch[1]}` as ChipVersion : 'Unknown';
+  const builds: Build[] = [];
+  if (/\b(?:build\s*38|grch38|hg38)\b/.test(header)) builds.push('GRCh38');
+  if (/\b(?:build\s*37|grch37|hg19)\b/.test(header)) builds.push('GRCh37');
+  if (/\b(?:build\s*36|ncbi36|hg18)\b/.test(header)) builds.push('NCBI36');
+  return { chip, build: builds.length === 1 ? builds[0] : 'Unknown' };
+}
 
-  for (let i = 0; i < variants.length; i++) {
-    const v = variants[i];
+export function performSampleQC(variants: RawVariant[], detectedChip: ChipVersion, detectedBuild: Build, fileName: string, fileSizeBytes: number): GenotypeSampleQC {
+  let validAutosomalCalls = 0, sexChromosomeCalls = 0, mitochondrialCalls = 0, noCallCount = 0;
+  let heterozygousCount = 0, homozygousCount = 0, transitionsCount = 0, transversionsCount = 0;
+  for (const v of variants) {
     const gt = v.genotype.toUpperCase().trim();
     const chr = v.chromosome.toUpperCase().replace(/^CHR/, '');
-
-    // Check for no-calls
-    if (!gt || gt === '--' || gt === '__' || gt === '??' || gt === '00' || gt === 'NN' || gt === 'D' || gt === 'I' && gt.length === 1) {
-      noCallCount++;
-      continue;
-    }
-
-    // Chromosome categorization
-    const isAutosomal = !isNaN(Number(chr)) && Number(chr) >= 1 && Number(chr) <= 22;
-    const isSex = chr === 'X' || chr === 'Y';
-    const isMT = chr === 'MT' || chr === 'M';
-
-    if (isAutosomal) {
-      validAutosomalCalls++;
-    } else if (isSex) {
-      sexChromosomeCalls++;
-    } else if (isMT) {
-      mitochondrialCalls++;
-    }
-
-    // Heterozygosity check for bi-allelic calls
-    if (gt.length === 2) {
-      const a1 = gt[0];
-      const a2 = gt[1];
-      if (a1 === a2) {
-        homozygousCount++;
-      } else {
-        heterozygousCount++;
-        // Ti/Tv calculation on autosomal heterozygous/polymorphic calls
-        if (isAutosomal) {
-          const pair = `${a1}${a2}`;
-          if (TRANSITIONS.has(pair)) {
-            transitionsCount++;
-          } else if (TRANSVERSIONS.has(pair)) {
-            transversionsCount++;
-          }
-        }
-      }
-    } else if (gt.length === 1) {
-      // Hemizygous call (e.g. male X / Y / MT)
-      homozygousCount++;
+    if (!isCalledGenotype(gt, chr)) { noCallCount++; continue; }
+    const autosomal = /^(?:[1-9]|1[0-9]|2[0-2])$/.test(chr);
+    if (autosomal) validAutosomalCalls++;
+    else if (chr === 'X' || chr === 'Y' || chr === 'XY') sexChromosomeCalls++;
+    else if (chr === 'MT' || chr === 'M') mitochondrialCalls++;
+    if (gt.length !== 2) continue;
+    if (gt[0] === gt[1]) homozygousCount++;
+    else {
+      heterozygousCount++;
+      if (autosomal && TRANSITIONS.has(gt)) transitionsCount++;
+      else if (autosomal && TRANSVERSIONS.has(gt)) transversionsCount++;
     }
   }
-
-  const total = variants.length;
-  const validCalls = total - noCallCount;
-  const callRate = total > 0 ? (validCalls / total) * 100 : 0;
-  const hetHomRatio = homozygousCount > 0 ? heterozygousCount / homozygousCount : 0;
-  const titvRatio = transversionsCount > 0 ? transitionsCount / transversionsCount : 2.1;
-
   return {
-    totalVariants: total,
-    validAutosomalCalls,
-    sexChromosomeCalls,
-    mitochondrialCalls,
-    noCallCount,
-    callRate: Math.round(callRate * 100) / 100,
-    heterozygousCount,
-    homozygousCount,
-    hetHomRatio: Math.round(hetHomRatio * 100) / 100,
-    transitionsCount,
-    transversionsCount,
-    titvRatio: Math.round(titvRatio * 100) / 100,
-    detectedChip,
-    detectedBuild,
-    parsedAt: new Date().toISOString(),
-    fileName,
-    fileSizeBytes,
+    totalVariants: variants.length, validAutosomalCalls, sexChromosomeCalls, mitochondrialCalls, noCallCount,
+    callRate: variants.length ? (variants.length - noCallCount) / variants.length * 100 : 0,
+    heterozygousCount, homozygousCount,
+    hetHomRatio: homozygousCount ? heterozygousCount / homozygousCount : 0,
+    transitionsCount, transversionsCount,
+    titvRatio: transversionsCount ? transitionsCount / transversionsCount : null,
+    detectedChip, detectedBuild, parsedAt: new Date().toISOString(), fileName, fileSizeBytes,
   };
-}
-
-export function complementAllele(allele: string): string {
-  switch (allele.toUpperCase()) {
-    case 'A': return 'T';
-    case 'T': return 'A';
-    case 'C': return 'G';
-    case 'G': return 'C';
-    default: return allele;
-  }
-}
-
-export function complementGenotype(genotype: string): string {
-  return genotype.split('').map(complementAllele).join('');
 }

@@ -1,0 +1,1264 @@
+{
+  "id": "PGS000001",
+  "name": "PRS77_BC",
+  "trait": "Breast cancer",
+  "citation": "Mavaddat et al. (2015), doi:10.1093/jnci/djv036",
+  "url": "https://www.pgscatalog.org/score/PGS000001/",
+  "weightType": "log odds (effect_weight = ln(OR) in the source file)",
+  "sources": [
+    {
+      "build": "GRCh37",
+      "filename": "PGS000001_hmPOS_GRCh37.txt.gz",
+      "sha256": "5a3069e1a1844df02f3d24e889f97dfad03ee0c40888fc5ecf5f44dc5c36ffc3"
+    },
+    {
+      "build": "GRCh38",
+      "filename": "PGS000001_hmPOS_GRCh38.txt.gz",
+      "sha256": "27ce4c57928a9dc40ddb982c899012d66b88d2d3fcae8f84aecdc48279f5615e"
+    },
+    {
+      "build": "GRCh37",
+      "filename": "PGS000001-ensembl-GRCh37.json",
+      "sha256": "9d9e3999d7b21077ec43be32cd74d33bca4bbb9a12a177aa190f0355ca5332bb"
+    },
+    {
+      "build": "GRCh38",
+      "filename": "PGS000001-ensembl-alleles.json",
+      "sha256": "5c30a2475f56960dc1212b92b68b171c47a1ac626a6681a6b8e68efb6c160455"
+    }
+  ],
+  "variants": [
+    {
+      "rsid": "rs78540526",
+      "chromosome": "11",
+      "positions": {
+        "GRCh37": 69331418,
+        "GRCh38": 69516650
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.16220387987485377,
+      "gene": "CCND1",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs75915166",
+      "chromosome": "11",
+      "positions": {
+        "GRCh37": 69379161,
+        "GRCh38": 69564393
+      },
+      "effectAllele": "A",
+      "otherAllele": "C",
+      "weight": 0.023618865598634027,
+      "gene": "CCND1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs554219",
+      "chromosome": "11",
+      "positions": {
+        "GRCh37": 69331642,
+        "GRCh38": 69516874
+      },
+      "effectAllele": "G",
+      "otherAllele": "C",
+      "weight": 0.1167157996959607,
+      "gene": "CCND1",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    },
+    {
+      "rsid": "rs7726159",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 1282319,
+        "GRCh38": 1282204
+      },
+      "effectAllele": "A",
+      "otherAllele": "C",
+      "weight": 0.03527061408191933,
+      "gene": "TERT",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs10069690",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 1279790,
+        "GRCh38": 1279675
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.023911820046312877,
+      "gene": "TERT",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2736108",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 1297488,
+        "GRCh38": 1297373
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": -0.06411194546724429,
+      "gene": "TERT",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2588809",
+      "chromosome": "14",
+      "positions": {
+        "GRCh37": 68660428,
+        "GRCh38": 68193711
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.06456977064930007,
+      "gene": "RAD51L1",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs999737",
+      "chromosome": "14",
+      "positions": {
+        "GRCh37": 69034682,
+        "GRCh38": 68567965
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": -0.07915143830543754,
+      "gene": "RAD51L1",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs10759243",
+      "chromosome": "9",
+      "positions": {
+        "GRCh37": 110306115,
+        "GRCh38": 107543834
+      },
+      "effectAllele": "A",
+      "otherAllele": "C",
+      "weight": 0.05278218543896948,
+      "gene": "9q31.2",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs865686",
+      "chromosome": "9",
+      "positions": {
+        "GRCh37": 110888478,
+        "GRCh38": 108126198
+      },
+      "effectAllele": "G",
+      "otherAllele": "T",
+      "weight": -0.10702857275852336,
+      "gene": "9q31",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2981579",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 123337335,
+        "GRCh38": 121577821
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.22506171047011356,
+      "gene": "FGFR2",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11199914",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 123093901,
+        "GRCh38": 121334387
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": -0.06187540371808753,
+      "gene": "10q26.12",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs7072776",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 22032942,
+        "GRCh38": 21744013
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.05647484692797899,
+      "gene": "DNAJC1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11814448",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 22315843,
+        "GRCh38": 22026914
+      },
+      "effectAllele": "C",
+      "otherAllele": "A",
+      "weight": 0.19721016928770527,
+      "gene": "DNAJC1",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs13387042",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 217905832,
+        "GRCh38": 217041109
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.12851542223542736,
+      "gene": "2q35",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs16857609",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 218296508,
+        "GRCh38": 217431785
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.06961934188005707,
+      "gene": "2q35",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11552449",
+      "chromosome": "1",
+      "positions": {
+        "GRCh37": 114448389,
+        "GRCh38": 113905767
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.0778865386570712,
+      "gene": "1p13.2",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11249433",
+      "chromosome": "1",
+      "positions": {
+        "GRCh37": 121280613,
+        "GRCh38": 121538815
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.09467361360268099,
+      "gene": "1p11.2",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs1045485",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 202149589,
+        "GRCh38": 201284866
+      },
+      "effectAllele": "C",
+      "otherAllele": "G",
+      "weight": -0.03624913267512103,
+      "gene": "CASP8",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    },
+    {
+      "rsid": "rs4973768",
+      "chromosome": "3",
+      "positions": {
+        "GRCh37": 27416013,
+        "GRCh38": 27374522
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.0896578719305354,
+      "gene": "SLC4A7",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs10941679",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 44706498,
+        "GRCh38": 44706396
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.11315009793265578,
+      "gene": "5p12",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs889312",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 56031884,
+        "GRCh38": 56736057
+      },
+      "effectAllele": "C",
+      "otherAllele": "A",
+      "weight": 0.11118352896061494,
+      "gene": "MAP3K1",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs12662670",
+      "chromosome": "6",
+      "positions": {
+        "GRCh37": 151918856,
+        "GRCh38": 151597721
+      },
+      "effectAllele": "G",
+      "otherAllele": "T",
+      "weight": 0.13032626167557426,
+      "gene": "ESR1",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2046210",
+      "chromosome": "6",
+      "positions": {
+        "GRCh37": 151948366,
+        "GRCh38": 151627231
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.04602443831127925,
+      "gene": "ESR1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs13281615",
+      "chromosome": "8",
+      "positions": {
+        "GRCh37": 128355618,
+        "GRCh38": 127343372
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.09075436326846412,
+      "gene": "8q24",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs1011970",
+      "chromosome": "9",
+      "positions": {
+        "GRCh37": 22062134,
+        "GRCh38": 22062135
+      },
+      "effectAllele": "T",
+      "otherAllele": "G",
+      "weight": 0.04898062222162188,
+      "gene": "CDKN2A/B",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2380205",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 5886734,
+        "GRCh38": 5844771
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": -0.023166278031839585,
+      "gene": "ANKRD16",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs10995190",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 64278682,
+        "GRCh38": 62518923
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.15513449694999074,
+      "gene": "ZNF365",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs704010",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 80841148,
+        "GRCh38": 79081391
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.06756518616242388,
+      "gene": "ZMIZ1",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs3817198",
+      "chromosome": "11",
+      "positions": {
+        "GRCh37": 1909006,
+        "GRCh38": 1887776
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": 0.07176236622689079,
+      "gene": "LSP1",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs10771399",
+      "chromosome": "12",
+      "positions": {
+        "GRCh37": 28155080,
+        "GRCh38": 28002147
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.14745646946787522,
+      "gene": "PTHLH",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs1292011",
+      "chromosome": "12",
+      "positions": {
+        "GRCh37": 115836522,
+        "GRCh38": 115398717
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.08131852117758834,
+      "gene": "12q24",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs3803662",
+      "chromosome": "16",
+      "positions": {
+        "GRCh37": 52586341,
+        "GRCh38": 52552429
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.20351210936498243,
+      "gene": "TOX3",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs6504950",
+      "chromosome": "17",
+      "positions": {
+        "GRCh37": 53056471,
+        "GRCh38": 54979110
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.06827884075329438,
+      "gene": "COX11",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs8170",
+      "chromosome": "19",
+      "positions": {
+        "GRCh37": 17389704,
+        "GRCh38": 17278895
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.03091710263472161,
+      "gene": "19p13",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2363956",
+      "chromosome": "19",
+      "positions": {
+        "GRCh37": 17394124,
+        "GRCh38": 17283315
+      },
+      "effectAllele": "T",
+      "otherAllele": "G",
+      "weight": 0.0260575343192896,
+      "gene": "19p13",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2823093",
+      "chromosome": "21",
+      "positions": {
+        "GRCh37": 16520832,
+        "GRCh38": 15148511
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.0753703070247766,
+      "gene": "NRIP1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs17879961",
+      "chromosome": "22",
+      "positions": {
+        "GRCh37": 29121087,
+        "GRCh38": 28725099
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.3098348770929142,
+      "gene": "CHEK2 I157T",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs616488",
+      "chromosome": "1",
+      "positions": {
+        "GRCh37": 10566215,
+        "GRCh38": 10506158
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.060068526466119515,
+      "gene": "PEX14",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs4849887",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 121245122,
+        "GRCh38": 120487546
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": -0.08479565170471633,
+      "gene": "2q14.2",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2016394",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 172972971,
+        "GRCh38": 172108243
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.05087233037375655,
+      "gene": "2q31.1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs1550623",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 174212894,
+        "GRCh38": 173348166
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.0570995920405728,
+      "gene": "CDCA7",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs6762644",
+      "chromosome": "3",
+      "positions": {
+        "GRCh37": 4742276,
+        "GRCh38": 4700592
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.06400712997429242,
+      "gene": "3p26.2",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs12493607",
+      "chromosome": "3",
+      "positions": {
+        "GRCh37": 30682939,
+        "GRCh38": 30641447
+      },
+      "effectAllele": "C",
+      "otherAllele": "G",
+      "weight": 0.051548261880576554,
+      "gene": "TGFBR2",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    },
+    {
+      "rsid": "rs9790517",
+      "chromosome": "4",
+      "positions": {
+        "GRCh37": 106084778,
+        "GRCh38": 105163621
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.04697900119399464,
+      "gene": "TET2",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs6828523",
+      "chromosome": "4",
+      "positions": {
+        "GRCh37": 175846426,
+        "GRCh38": 174925275
+      },
+      "effectAllele": "A",
+      "otherAllele": "C",
+      "weight": -0.09915757153321861,
+      "gene": "ADAM29",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs10472076",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 58184061,
+        "GRCh38": 58888234
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": 0.04104596943600102,
+      "gene": "RAB3C",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs1353747",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 58337481,
+        "GRCh38": 59041654
+      },
+      "effectAllele": "G",
+      "otherAllele": "T",
+      "weight": -0.08196956286725067,
+      "gene": "PDE4D",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs1432679",
+      "chromosome": "5",
+      "positions": {
+        "GRCh37": 158244083,
+        "GRCh38": 158817075
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": 0.06485097231961627,
+      "gene": "EBF1",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "complement"
+    },
+    {
+      "rsid": "rs11242675",
+      "chromosome": "6",
+      "positions": {
+        "GRCh37": 1318878,
+        "GRCh38": 1318643
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": -0.05879504651050549,
+      "gene": "FOXQ1",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs204247",
+      "chromosome": "6",
+      "positions": {
+        "GRCh37": 13722523,
+        "GRCh38": 13722291
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.049075837646592645,
+      "gene": "RANBP1",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs17529111",
+      "chromosome": "6",
+      "positions": {
+        "GRCh37": 82128386,
+        "GRCh38": 81418669
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": 0.044686517622406094,
+      "gene": "6q14.1",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "complement"
+    },
+    {
+      "rsid": "rs720475",
+      "chromosome": "7",
+      "positions": {
+        "GRCh37": 144074929,
+        "GRCh38": 144377836
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.05635873366938424,
+      "gene": "7q35",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs9693444",
+      "chromosome": "8",
+      "positions": {
+        "GRCh37": 29509616,
+        "GRCh38": 29652100
+      },
+      "effectAllele": "A",
+      "otherAllele": "C",
+      "weight": 0.07045846364856137,
+      "gene": "8p21.1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs6472903",
+      "chromosome": "8",
+      "positions": {
+        "GRCh37": 76230301,
+        "GRCh38": 75318066
+      },
+      "effectAllele": "G",
+      "otherAllele": "T",
+      "weight": -0.0916767885719041,
+      "gene": "8q21.11",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs2943559",
+      "chromosome": "8",
+      "positions": {
+        "GRCh37": 76417937,
+        "GRCh38": 75505702
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.1252219647533818,
+      "gene": "HNF4G",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11780156",
+      "chromosome": "8",
+      "positions": {
+        "GRCh37": 129194641,
+        "GRCh38": 128182395
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": 0.06681717303731709,
+      "gene": "8q24.21",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs7904519",
+      "chromosome": "10",
+      "positions": {
+        "GRCh37": 114773927,
+        "GRCh38": 113014168
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.05675833381860888,
+      "gene": "TCF7L2",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs3903072",
+      "chromosome": "11",
+      "positions": {
+        "GRCh37": 65583066,
+        "GRCh38": 65815595
+      },
+      "effectAllele": "T",
+      "otherAllele": "G",
+      "weight": -0.057417270869950646,
+      "gene": "11q13.1",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11820646",
+      "chromosome": "11",
+      "positions": {
+        "GRCh37": 129461171,
+        "GRCh38": 129591276
+      },
+      "effectAllele": "T",
+      "otherAllele": "C",
+      "weight": -0.044683607626640025,
+      "gene": "11q24.3",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "C",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs12422552",
+      "chromosome": "12",
+      "positions": {
+        "GRCh37": 14413931,
+        "GRCh38": 14260997
+      },
+      "effectAllele": "C",
+      "otherAllele": "G",
+      "weight": 0.0321767316952212,
+      "gene": "12p13.1",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    },
+    {
+      "rsid": "rs17356907",
+      "chromosome": "12",
+      "positions": {
+        "GRCh37": 96027759,
+        "GRCh38": 95633983
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.09673118895977176,
+      "gene": "NTN4",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11571833",
+      "chromosome": "13",
+      "positions": {
+        "GRCh37": 32972626,
+        "GRCh38": 32398489
+      },
+      "effectAllele": "T",
+      "otherAllele": "A",
+      "weight": 0.23182575169704359,
+      "gene": "BRCA2",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    },
+    {
+      "rsid": "rs2236007",
+      "chromosome": "14",
+      "positions": {
+        "GRCh37": 37132769,
+        "GRCh38": 36663564
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.08305557513732584,
+      "gene": "PAX9",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs941764",
+      "chromosome": "14",
+      "positions": {
+        "GRCh37": 91841069,
+        "GRCh38": 91374725
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.06165938038672779,
+      "gene": "CCDC88C",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs17817449",
+      "chromosome": "16",
+      "positions": {
+        "GRCh37": 53813367,
+        "GRCh38": 53779455
+      },
+      "effectAllele": "G",
+      "otherAllele": "T",
+      "weight": -0.07257069283483537,
+      "gene": "FTO",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs13329835",
+      "chromosome": "16",
+      "positions": {
+        "GRCh37": 80650805,
+        "GRCh38": 80616908
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": 0.07306457085700523,
+      "gene": "CDYL2",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs527616",
+      "chromosome": "18",
+      "positions": {
+        "GRCh37": 24337424,
+        "GRCh38": 26757460
+      },
+      "effectAllele": "C",
+      "otherAllele": "G",
+      "weight": -0.04363845702982949,
+      "gene": "18q11.2",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    },
+    {
+      "rsid": "rs1436904",
+      "chromosome": "18",
+      "positions": {
+        "GRCh37": 24570667,
+        "GRCh38": 26990703
+      },
+      "effectAllele": "G",
+      "otherAllele": "T",
+      "weight": -0.05487866150998945,
+      "gene": "CHST9",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs4808801",
+      "chromosome": "19",
+      "positions": {
+        "GRCh37": 18571141,
+        "GRCh38": 18460331
+      },
+      "effectAllele": "G",
+      "otherAllele": "A",
+      "weight": -0.06731570728486712,
+      "gene": "SSBP4",
+      "sourceEffectAllele": "G",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs3760982",
+      "chromosome": "19",
+      "positions": {
+        "GRCh37": 44286513,
+        "GRCh38": 43782361
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.05382508669490737,
+      "gene": "19q13.31",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs132390",
+      "chromosome": "22",
+      "positions": {
+        "GRCh37": 29621477,
+        "GRCh38": 29225488
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": 0.10354887562855884,
+      "gene": "22q12.2",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs6001930",
+      "chromosome": "22",
+      "positions": {
+        "GRCh37": 40876234,
+        "GRCh38": 40480230
+      },
+      "effectAllele": "C",
+      "otherAllele": "T",
+      "weight": 0.1261920252377594,
+      "gene": "MKL1",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "T",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs4245739",
+      "chromosome": "1",
+      "positions": {
+        "GRCh37": 204518842,
+        "GRCh38": 204549714
+      },
+      "effectAllele": "C",
+      "otherAllele": "A",
+      "weight": 0.02868463385990886,
+      "gene": "MDM4",
+      "sourceEffectAllele": "C",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs6678914",
+      "chromosome": "1",
+      "positions": {
+        "GRCh37": 202187176,
+        "GRCh38": 202218048
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": -0.011060947359424948,
+      "gene": "LGR6",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs12710696",
+      "chromosome": "2",
+      "positions": {
+        "GRCh37": 19320803,
+        "GRCh38": 19121042
+      },
+      "effectAllele": "A",
+      "otherAllele": "G",
+      "weight": 0.037969931251628626,
+      "gene": "2p24.1",
+      "sourceEffectAllele": "A",
+      "sourceOtherAllele": "G",
+      "strandAmbiguous": false,
+      "orientation": "direct"
+    },
+    {
+      "rsid": "rs11075995",
+      "chromosome": "16",
+      "positions": {
+        "GRCh37": 53855291,
+        "GRCh38": 53821379
+      },
+      "effectAllele": "T",
+      "otherAllele": "A",
+      "weight": 0.03613904661587314,
+      "gene": "FTO",
+      "sourceEffectAllele": "T",
+      "sourceOtherAllele": "A",
+      "strandAmbiguous": true,
+      "orientation": "unresolved-palindromic"
+    }
+  ]
+}

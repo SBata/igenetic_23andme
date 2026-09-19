@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'iGenetic PRO | Research-Grade 23andMe Re-Analysis Engine',
-  description: 'Zero-knowledge client-side computational genomics platform for 23andMe data. High-confidence PGx, PRS, ClinVar, and GWAS re-analysis.',
+  title: 'iGenetic | Genotype notebook',
+  description: 'Inspect 23andMe genotype files locally. Research marker observations with explicit analysis limitations.',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light">
-      <body className="bg-slate-50 text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
+      <body>
         {children}
       </body>
     </html>
