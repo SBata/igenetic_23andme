@@ -7,6 +7,8 @@ import type { FullAnalysisResult } from '@/types/genomics';
 
 export function HeroWizard({ onAnalysisComplete }: { onAnalysisComplete: (result: FullAnalysisResult) => void }) {
   const busy = useRef(false);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [stage, setStage] = useState('');
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState('');
@@ -22,7 +24,7 @@ export function HeroWizard({ onAnalysisComplete }: { onAnalysisComplete: (result
         onAnalysisComplete(await analyzeFile(file, (step, percent) => { setStage(labels[step]); setProgress(percent); }));
       } else {
         await new Promise(resolve => setTimeout(resolve, 0));
-        const demo = generateBenchmarkSampleVariants();
+        const demo = generateBenchmarkSampleVariants(true);
         const { chip, build } = detectChipAndBuild(demo.header, new Set(demo.variants.map(v => v.rsid)));
         const qc = performSampleQC(demo.variants, chip, build, 'Synthetic demo', 0);
         onAnalysisComplete({ ...runFullGenomicAnalysis(demo.variants, qc), isDemo: true });
@@ -35,11 +37,24 @@ export function HeroWizard({ onAnalysisComplete }: { onAnalysisComplete: (result
   return <section className="intake stack">
     <div className="section-heading"><h1>Read your DNA file.<br />Keep it on your device.</h1><p>Open a 23andMe export to inspect recorded genotypes and compare marker availability across research panels.</p></div>
     <div className="notice"><h2>A personal research notebook</h2><p>Explore recorded variants and published score contributions. Results are for learning, not diagnosis, prognosis, risk stratification or treatment decisions.</p></div>
-    <div className={`file-picker ${dragging ? 'dragging' : ''}`} onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)} onDrop={e => { e.preventDefault(); setDragging(false); if (e.dataTransfer.files[0]) void load(e.dataTransfer.files[0]); }}>
+    <form className={`file-picker ${dragging ? 'dragging' : ''}`} aria-busy={!!stage} onSubmit={e => {
+      e.preventDefault();
+      const file = fileInput.current?.files?.[0] ?? selectedFile;
+      if (!file) { setError('Choose a TXT or ZIP file first, then click Analyze file.'); fileInput.current?.focus(); return; }
+      void load(file);
+    }} onDragOver={e => { e.preventDefault(); if (!busy.current) setDragging(true); }} onDragLeave={() => setDragging(false)} onDrop={e => {
+      e.preventDefault(); setDragging(false);
+      if (busy.current || !e.dataTransfer.files[0]) return;
+      if (fileInput.current) fileInput.current.value = '';
+      setSelectedFile(e.dataTransfer.files[0]); setError('');
+    }}>
       <label htmlFor="genotype-file">Choose your 23andMe file</label>
-      <p>Drop a TXT, TSV, CSV or ZIP here, or choose a file below. Maximum 32 MB.</p>
-      <input id="genotype-file" type="file" accept=".txt,.tsv,.csv,.zip" disabled={!!stage} onChange={e => { const file = e.currentTarget.files?.[0]; e.currentTarget.value = ''; if (file) void load(file); }} />
-    </div>
+      <p id="file-help">Choose or drop a TXT, TSV, CSV or ZIP, then click Analyze file. Maximum 32 MB. Nothing is uploaded.</p>
+      <input ref={fileInput} id="genotype-file" type="file" accept=".txt,.tsv,.csv,.zip" aria-describedby="file-help" disabled={!!stage} onChange={e => { setSelectedFile(e.currentTarget.files?.[0] ?? null); setError(''); }} />
+      {selectedFile && <p role="status">Ready to analyze: {selectedFile.name}</p>}
+      <button type="submit" className="primary" disabled={!!stage}>{stage ? 'Analyzing file…' : 'Analyze file'}</button>
+      <noscript><p>JavaScript is required to read the file on your device. Enable it for this local app, then reload.</p></noscript>
+    </form>
     {stage && <div role="status"><p>{stage}</p><progress aria-label={stage} value={progress} max={100}>{progress}%</progress></div>}
     {error && <p className="notice" role="alert">{error}</p>}
     <div className="intake-actions"><button disabled={!!stage} onClick={() => void load()}>Try synthetic demo</button><p className="muted">Demo calls are invented and are not a scientific benchmark.</p></div>

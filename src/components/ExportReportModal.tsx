@@ -11,7 +11,7 @@ export function ExportReportModal({ analysis, onClose }: { analysis: FullAnalysi
     setDownloadUrl(url);
     return () => URL.revokeObjectURL(url);
   }, [analysis]);
-  return <dialog ref={dialog} aria-labelledby="export-title" onCancel={onClose} onClose={onClose}>
+  return <dialog ref={dialog} aria-labelledby="export-title" onCancel={onClose}>
     <div className="stack"><div className="dialog-heading"><h2 id="export-title">Export observations</h2><button onClick={onClose}>Close</button></div>
       <p>The JSON report includes score inputs, unrounded weights and contributions, model source, panel genotypes and file metadata. It excludes the full raw genotype file.</p>
       <p>This download contains genetic information and remains on your device after you clear the app.</p>

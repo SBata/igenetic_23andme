@@ -37,6 +37,6 @@ export default function Home() {
       </>}
     </main>
     {exportOpen && result && <ExportReportModal analysis={result} onClose={() => setExportOpen(false)} />}
-    <footer>Local file processing. Research exploration only. Clinical interpretation unavailable.</footer>
+    <footer>iGenetic · Personal genetic research · Your file stays on this device</footer>
   </div>;
 }

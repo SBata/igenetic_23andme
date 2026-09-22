@@ -1,0 +1,174 @@
+{
+  "id": "PGS000035",
+  "name": "PRS_AF",
+  "ftp_scoring_file": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000035/ScoringFiles/PGS000035.txt.gz",
+  "ftp_harmonized_scoring_files": {
+    "GRCh37": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000035/ScoringFiles/Harmonized/PGS000035_hmPOS_GRCh37.txt.gz"
+    },
+    "GRCh38": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000035/ScoringFiles/Harmonized/PGS000035_hmPOS_GRCh38.txt.gz"
+    }
+  },
+  "publication": {
+    "id": "PGP000022",
+    "title": "Genetic Predisposition, Clinical Risk Factor Burden, and Lifetime Risk of Atrial Fibrillation.",
+    "doi": "10.1161/CIRCULATIONAHA.117.031431",
+    "PMID": 29129827,
+    "journal": "Circulation",
+    "firstauthor": "Weng LC",
+    "date_publication": "2017-11-12"
+  },
+  "matches_publication": true,
+  "samples_variants": [
+    {
+      "sample_number": 5875,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "African American or Afro-Caribbean",
+      "ancestry_free": null,
+      "ancestry_country": "U.S., NR",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST004296",
+      "source_PMID": 28416818,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 4130,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "East Asian",
+      "ancestry_free": null,
+      "ancestry_country": "Japan",
+      "ancestry_additional": "Japanese",
+      "source_GWAS_catalog": "GCST004296",
+      "source_PMID": 28416818,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 118755,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "U.S., Germany, Netherlands, Switzerland, Finland, Sweden, U.K., NR",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST004296",
+      "source_PMID": 28416818,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 3358,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "Hispanic or Latin American",
+      "ancestry_free": null,
+      "ancestry_country": "U.S., Brazil",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST004296",
+      "source_PMID": 28416818,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    }
+  ],
+  "samples_training": [
+    {
+      "sample_number": 120286,
+      "sample_cases": 2987,
+      "sample_controls": 117299,
+      "sample_percent_male": 47.3,
+      "sample_age": null,
+      "phenotyping_free": "AF was defined as a reported history of AF or atrial flutter, or if an individual had undergone a cardioversion, pulmonary vein isolation procedure, atrial flutter ablation, atrioventricular node ablation, or received an ICD code of 427.3 (ICD-9) or I48 (ICD-10).",
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "UK",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": null,
+      "source_PMID": null,
+      "source_DOI": null,
+      "cohorts": [
+        {
+          "name_short": "UKB",
+          "name_full": "UK Biobank",
+          "name_others": null
+        }
+      ],
+      "cohorts_additional": null
+    }
+  ],
+  "trait_reported": "Atrial fibrillation",
+  "trait_additional": null,
+  "trait_efo": [
+    {
+      "id": "MONDO_0004981",
+      "label": "atrial fibrillation",
+      "description": "A disorder characterized by an electrocardiographic finding of a supraventricular arrhythmia characterized by the replacement of consistent P waves by rapid oscillations or fibrillatory waves that vary in size, shape and timing and are accompanied by an irregular ventricular response. (CDISC) [NCIT: P378]",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004981"
+    }
+  ],
+  "method_name": "Pruning and Thresholding (P+T)",
+  "method_params": "P < 10^-4; r2 < 0.5",
+  "variants_number": 1168,
+  "variants_interactions": 0,
+  "variants_genomebuild": "hg19",
+  "weight_type": "NR",
+  "ancestry_distribution": {
+    "dev": {
+      "dist": {
+        "EUR": 100
+      },
+      "count": 120286
+    },
+    "eval": {
+      "dist": {
+        "EUR": 16.7,
+        "MAE": 66.7,
+        "MAO": 16.7
+      },
+      "count": 6,
+      "multi": [
+        "MAE_EUR",
+        "MAE_NR",
+        "MAO_GME",
+        "MAO_SAS",
+        "MAO_AFR",
+        "MAO_NR"
+      ]
+    },
+    "gwas": {
+      "dist": {
+        "AFR": 4.4,
+        "AMR": 2.5,
+        "EAS": 3.1,
+        "EUR": 89.9
+      },
+      "count": 132118
+    }
+  },
+  "date_release": "2019-10-14",
+  "license": "PGS obtained from the Catalog should be cited appropriately, and used in accordance with any licensing restrictions set by the authors. See EBI Terms of Use (https://www.ebi.ac.uk/about/terms-of-use/) for additional details."
+}

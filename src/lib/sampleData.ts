@@ -1,10 +1,11 @@
 import type { RawVariant } from '../types/genomics';
-import { reference } from './scoring';
+import { reference, scoreModels, type ScoreVariant } from './scoring';
 
-export function generateBenchmarkSampleVariants(): { header: string[]; variants: RawVariant[] } {
+export function generateBenchmarkSampleVariants(allModels = false): { header: string[]; variants: RawVariant[] } {
+  const markers: ScoreVariant[] = allModels ? [...new Map(scoreModels.flatMap(m => m.variants).filter(m => /^[ACGT]$/.test(m.effectAllele) && /^[ACGT]$/.test(m.otherAllele) && m.positions.GRCh37 > 0).map(m => [m.rsid, m])).values()] : reference.variants;
   return {
     header: ['# Synthetic demonstration, not a real person', '# build 37'],
-    variants: reference.variants.map((marker, i) => ({
+    variants: markers.map((marker, i) => ({
       rsid: marker.rsid,
       chromosome: marker.chromosome,
       position: marker.positions.GRCh37,

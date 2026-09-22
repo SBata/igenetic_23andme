@@ -103,6 +103,9 @@ export interface PRSCatalogModel {
 }
 
 export interface PRSResult {
+  description: string;
+  weightType: string;
+  effectMeasure: string;
   status: 'complete' | 'partial' | 'unavailable';
   reason: string;
   modelId: string;

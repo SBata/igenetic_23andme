@@ -1,6 +1,6 @@
 import type { FullAnalysisResult, GenotypeSampleQC, PRSResult, RawVariant, VariantObservation } from '@/types/genomics';
 import { CURATED_PGX_GENES } from './referenceData/pgx';
-import { reference, scoreVariants } from './scoring';
+import { scoreModels, scoreVariants } from './scoring';
 import { CURATED_GWAS_TRAITS } from './referenceData/gwas';
 import { isCalledGenotype } from './qc';
 
@@ -27,11 +27,15 @@ export function runFullGenomicAnalysis(variants: RawVariant[], qc: GenotypeSampl
     };
   };
 
-  const calculation = scoreVariants(variantMap, qc.detectedBuild);
-  const prs: PRSResult[] = [{
+  const prs: PRSResult[] = scoreModels.map(reference => {
+    const calculation = scoreVariants(variantMap, qc.detectedBuild, reference.variants);
+    return {
       modelId: reference.id,
       traitName: reference.trait,
-      category: 'Oncology',
+      category: reference.category,
+      description: reference.description,
+      weightType: reference.weightType,
+      effectMeasure: reference.effectMeasure,
       source: reference.url,
       citation: reference.citation,
       sourceFiles: reference.sources,
@@ -50,7 +54,8 @@ export function runFullGenomicAnalysis(variants: RawVariant[], qc: GenotypeSampl
       relativeRisk: null,
       riskTier: 'Unavailable',
       variantBreakdown: reference.variants.map(marker => observe(marker.rsid)),
-    }];
+    };
+  });
 
   return {
     schemaVersion: 3,

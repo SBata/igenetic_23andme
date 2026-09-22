@@ -2,7 +2,23 @@
 
 Reviewed 2026-09-19. Scope: a personal open-source research notebook. Clinical certification is not a requirement or release gate.
 
-## Current implementation update
+## Five-model restoration and results redesign
+
+The earlier one-model limitation is superseded: source-backed replacements now cover CAD (PGS000011), T2D (PGS000031), Alzheimer's excluding APOE (PGS000025), and AFib (PGS000035), alongside breast cancer. These are different published models from the incorrectly labelled legacy miniature panels, not a reinstatement of their weights or invented population statistics. All 1,376 source rows remain visible; unresolved assignments remain excluded. See `references/README.md` for provenance and maximum eligible counts.
+
+Each usable variant shows its recorded genotype, counted allele, published association direction and signed contribution. Zero dosage is explicitly distinct from protection and from a missing/excluded call. AFib uses score-direction wording because its weight unit is unreported in the Catalog. Model-specific sums are not compared to a population average or combined across diseases. Independent Decimal oracles over archived TSV weights pass for all five models in both builds.
+
+Direction and purpose are recorded in `DESIGN.md`: modern science dashboard, ENERGY 2 / RHYTHM 2 / MOTION 1. A visible model browser replaces the hidden single-option select. Coverage stays beside the subtotal, and diverging bars show the largest observed contributions. Variant tables reflow into readable rows on phones. Search, directional filters and progressive row disclosure support the 1,168-row AFib model. No UI/chart dependencies were added.
+
+Browser evidence: all five trait buttons select their respective model/count/subtotal; all four directional filters update matching counts; exclusions show explanations; an unknown search produces an empty state; Show 30 more increases displayed rows from 30 to 60; both method disclosures open; all seven application views navigate; keyboard Tab moves from search to the labelled select with visible focus. Export opens with Download JSON and closes with Escape. Fixed a React development-mode cleanup/close-event race that dismissed Export immediately. Synthetic data only was used.
+
+Antislop delivery gate:
+- Hard gate PASS: built app; desktop and 390px browser review; document width equals 390px and mobile variant rows fit. Changed controls exercised as listed above. Body/muted/higher/lower text contrast is 14.27/5.72/6.77/7.34:1; summary secondary text is 10.65:1. No invented risk statistics or decorative assets.
+- Purpose gate PASS: coverage belongs beside arithmetic; diverging bars encode signed magnitude; teal/copper direction is also expressed in words and signs; the model browser exposes the restored content. Reasons recorded in `DESIGN.md`.
+- Liveliness PASS: the dark numerical surface provides a focal point; type scale, model selection and quieter provenance establish hierarchy; chart and variant rows vary composition at the declared 2/2/1 dials.
+- Craftsmanship PASS: tests, source regeneration, TypeScript and build pass; filters, empty states, responsive rows, keyboard focus and export controls verified. Local computation and absence of genotype network requests remain covered by source checks.
+
+## Earlier one-model implementation update
 
 1. Restored additive calculations with build/coordinate/allele checks, signed contributions, explicit missingness and compensated summation. No cross-disease probability aggregation. Unphased PGx inputs remain observations; CYP2C9 and VKORC1 are separate panels.
 2. Replaced mislabeled mini-panels with archived PGS000001 source rows and a reproducible manifest. Checked allele orientation against both Ensembl builds. Corrected two reverse-strand rows and excluded seven unresolved palindromic rows. The UI labels the result an incomplete subtotal, at most 70/77 variants.

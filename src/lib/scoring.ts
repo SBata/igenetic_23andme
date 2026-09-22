@@ -1,5 +1,8 @@
 import type { Build, RawVariant } from '../types/genomics';
 import reference from './referenceData/score.json';
+import additionalModels from './referenceData/additional-scores.json';
+
+export const scoreModels = [{ ...reference, category: 'Oncology', effectMeasure: 'log-odds', description: 'Published 77-variant common-variant model. This is not a BRCA1/BRCA2 mutation screen.' }, ...additionalModels];
 
 export interface ScoreVariant {
   rsid: string;
@@ -10,10 +13,11 @@ export interface ScoreVariant {
   weight: number;
   gene: string;
   strandAmbiguous?: boolean;
+  referenceIssue?: string;
 }
 export type Contribution = ScoreVariant & {
   genotype: string | null;
-  status: 'scored' | 'missing' | 'uncalled' | 'unsupported-build' | 'coordinate-mismatch' | 'allele-mismatch' | 'ambiguous-strand';
+  status: 'scored' | 'missing' | 'uncalled' | 'unsupported-build' | 'coordinate-mismatch' | 'allele-mismatch' | 'ambiguous-strand' | 'unresolved-reference';
   dosage: number | null;
   contribution: number | null;
 };
@@ -21,11 +25,12 @@ export type Contribution = ScoreVariant & {
 export function scoreVariants(variants: Map<string, RawVariant>, build: Build, model: ScoreVariant[] = reference.variants) {
   const ids = new Set<string>();
   const contributions: Contribution[] = model.map(marker => {
-    if (ids.has(marker.rsid) || !Number.isFinite(marker.weight) || marker.effectAllele === marker.otherAllele || !/^[ACGT]$/.test(marker.effectAllele) || !/^[ACGT]$/.test(marker.otherAllele)) throw new Error('Invalid or duplicate scoring marker.');
+    if (ids.has(marker.rsid) || !Number.isFinite(marker.weight) || (!marker.referenceIssue && (marker.effectAllele === marker.otherAllele || !/^[ACGT]$/.test(marker.effectAllele) || !/^[ACGT]$/.test(marker.otherAllele)))) throw new Error('Invalid or duplicate scoring marker.');
     ids.add(marker.rsid);
     const call = variants.get(marker.rsid);
     let status: Contribution['status'] = 'scored';
     if (!call) status = 'missing';
+    else if (marker.referenceIssue) status = 'unresolved-reference';
     else if (build !== 'GRCh37' && build !== 'GRCh38') status = 'unsupported-build';
     else if (call.chromosome !== marker.chromosome || call.position !== marker.positions[build]) status = 'coordinate-mismatch';
     else if (!/^[ACGT]{2}$/.test(call.genotype)) status = 'uncalled';
@@ -49,3 +54,9 @@ export function scoreVariants(variants: Map<string, RawVariant>, build: Build, m
 }
 
 export { reference };
+
+export function contributionDirection(row: Contribution) {
+  if (row.contribution === null) return 'unscored';
+  if (row.contribution === 0) return 'zero';
+  return row.contribution > 0 ? 'higher' : 'lower';
+}

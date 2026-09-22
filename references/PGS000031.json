@@ -1,0 +1,78 @@
+{
+  "id": "PGS000031",
+  "name": "GRSt",
+  "ftp_scoring_file": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000031/ScoringFiles/PGS000031.txt.gz",
+  "ftp_harmonized_scoring_files": {
+    "GRCh37": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000031/ScoringFiles/Harmonized/PGS000031_hmPOS_GRCh37.txt.gz"
+    },
+    "GRCh38": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000031/ScoringFiles/Harmonized/PGS000031_hmPOS_GRCh38.txt.gz"
+    }
+  },
+  "publication": {
+    "id": "PGP000020",
+    "title": "Polygenic type 2 diabetes prediction at the limit of common variant detection.",
+    "doi": "10.2337/db13-1663",
+    "PMID": 24520119,
+    "journal": "Diabetes",
+    "firstauthor": "Vassy JL",
+    "date_publication": "2014-02-11"
+  },
+  "matches_publication": true,
+  "samples_variants": [
+    {
+      "sample_number": 69033,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "U.S., France, Germany, Netherlands, Finland, Iceland, Sweden, U.K., NR",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST005047",
+      "source_PMID": 22885922,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    }
+  ],
+  "samples_training": [],
+  "trait_reported": "Type 2 diabetes (T2D)",
+  "trait_additional": null,
+  "trait_efo": [
+    {
+      "id": "MONDO_0005148",
+      "label": "type 2 diabetes mellitus",
+      "description": "A type of diabetes mellitus that is characterized by insulin resistance or desensitization and increased blood glucose levels. This is a chronic disease that can develop gradually over the life of a patient and can be linked to both environmental factors and heredity. [NCIT: P378]",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005148"
+    }
+  ],
+  "method_name": "Genome-wide significant variants",
+  "method_params": "Index SNPs or their proxies",
+  "variants_number": 62,
+  "variants_interactions": 0,
+  "variants_genomebuild": "NCBI36",
+  "weight_type": "NR",
+  "ancestry_distribution": {
+    "eval": {
+      "dist": {
+        "AFR": 20,
+        "EUR": 40,
+        "GME": 40
+      },
+      "count": 5
+    },
+    "gwas": {
+      "dist": {
+        "EUR": 100
+      },
+      "count": 69033
+    }
+  },
+  "date_release": "2019-10-14",
+  "license": "PGS obtained from the Catalog should be cited appropriately, and used in accordance with any licensing restrictions set by the authors. See EBI Terms of Use (https://www.ebi.ac.uk/about/terms-of-use/) for additional details."
+}

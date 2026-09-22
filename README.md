@@ -2,7 +2,7 @@
 
 A browser-based notebook for inspecting 23andMe raw genotype exports. Files are processed locally; the app makes no live annotation requests and does not persist genotypes or results in browser storage.
 
-This is a personal research project, not a diagnosis, prognosis, risk-stratification or treatment tool. Clinical certification is not a project requirement. The app now calculates traceable observed contributions to PGS000001; it does not turn them into personal disease probabilities. See [REVIEW.md](REVIEW.md) for the review history and current verification notes.
+This is a personal research project, not a diagnosis, prognosis, risk-stratification or treatment tool. Clinical certification is not a project requirement. The app calculates traceable observed contributions to five published models; it does not turn them into personal disease probabilities. See [REVIEW.md](REVIEW.md) for the review history and current verification notes.
 
 ## What works
 
@@ -19,7 +19,7 @@ Limits: 32 MB input; 128 MB total expanded genotype text in ZIP; 1.5 million row
 
 | Analysis | Current behavior |
 | --- | --- |
-| Polygenic calculation | Observed PGS000001 weighted subtotal; incomplete, at most 70 of 77 rows |
+| Polygenic calculation | Five source-backed observed subtotals with per-variant direction, weights and exclusion reasons |
 | Percentile, relative or cumulative risk | Not calculated; no population calibration or baseline model is bundled |
 | Missing genotypes | Remain unknown; no frequency substitution or imputation |
 | PGx diplotypes, activity scores and dosing | Unavailable; raw panel observations only |
@@ -28,7 +28,17 @@ Limits: 32 MB input; 128 MB total expanded genotype text in ZIP; 1.5 million row
 | Genome build / chip | Separate metadata from explicit headers; otherwise unknown |
 | Liftover and ancestry inference | Not implemented |
 
-The legacy score panels, invented population statistics and unsupported clinical table have been removed. All 77 PGS000001 rows are archived with GRCh37/38 positions and independent Ensembl allele evidence. Two reverse-strand rows are explicitly complemented; seven palindromic rows lack independent source-strand evidence and are excluded. Thus the output is an incomplete observed subtotal, not a reproduced complete model. Missing calls are never zero-filled, and subtotals with different coverage cannot be compared.
+The legacy miniature panels and invented population statistics have been replaced. All source rows are retained, including those excluded from calculation. The supported models are:
+
+| Trait | Published model | Source rows | Currently eligible reference rows |
+| --- | --- | ---: | ---: |
+| Breast cancer | PGS000001, Mavaddat 2015 | 77 | 70 |
+| Coronary artery disease | PGS000011, Tada 2015 | 50 | 39 |
+| Type 2 diabetes | PGS000031, Vassy 2014 | 62 | 42 |
+| Alzheimer's disease (excluding APOE) | PGS000025, Chouraki 2016 | 19 | 16 |
+| Atrial fibrillation | PGS000035, Weng 2017 | 1,168 | 747 |
+
+GRCh37/38 positions and allele evidence are archived. Unresolved palindromic sites, incomplete or multiallelic source pairs, and conflicting reference assignments are excluded. All five outputs are therefore incomplete observed subtotals. Actual coverage also depends on the input file. Missing calls are never zero-filled, and subtotals with different coverage cannot be compared. Higher/lower labels describe the counted allele's published association relative to the other allele, not the user's risk relative to the population. Zero contribution is not protection. AFib units are unreported in the Catalog, so that panel displays score direction without an odds label.
 
 Each usable contribution is effect-allele dosage multiplied by published weight, retaining negative values. Compensated summation reduces floating-point accumulation error; JSON retains unrounded IEEE-754 numbers. This is not a guarantee of exact decimal arithmetic or scientific correctness. [Reference provenance](references/README.md) records sources, transformations, checksums and terms. The reproducible source manifest is included in exported reports.
 

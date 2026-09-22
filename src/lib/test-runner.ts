@@ -5,7 +5,7 @@ import { zipSync, strToU8 } from 'fflate';
 import { parse23andMeText, parseAndAnalyze23andMeFile } from './parser';
 import { detectChipAndBuild, isCalledGenotype, performSampleQC } from './qc';
 import { runFullGenomicAnalysis } from './engine';
-import { scoreVariants, reference, type ScoreVariant } from './scoring';
+import { scoreVariants, reference, scoreModels, contributionDirection, type ScoreVariant } from './scoring';
 import { generateBenchmarkSampleVariants } from './sampleData';
 import type { RawVariant } from '../types/genomics';
 
@@ -92,6 +92,30 @@ async function main() {
   assert.equal(score(calls, 'GRCh37', reference.variants).score, null);
   assert.ok(score(calls, 'GRCh37', reference.variants).contributions.some(row => row.status === 'ambiguous-strand'));
   assert.equal(score([variant('rs1', 'AT')], 'GRCh37', [{ ...model[0], strandAmbiguous: true }]).subtotal, null);
+  assert.equal(score([variant('rs1', 'AT')], 'GRCh37', [{ ...model[0], referenceIssue: 'Unresolved source' }]).contributions[0].status, 'unresolved-reference');
+  assert.deepEqual(score([variant('rs1', 'AT'), variant('rs2', 'CC')]).contributions.map(contributionDirection), ['higher', 'lower']);
+  assert.equal(contributionDirection(score([variant('rs1', 'TT')]).contributions[0]), 'zero');
+  assert.equal(contributionDirection(score([]).contributions[0]), 'unscored');
+  assert.deepEqual(scoreModels.map(m => m.variants.length), [77, 50, 62, 19, 1168]);
+  // Independent Python Decimal sums over archived TSV weights with repeating 0/1/2 dosages.
+  const decimalSubtotals: Record<string, number> = { PGS000001: 1.624445643430843162, PGS000011: 3.101764440512624150, PGS000031: 3.008759171302229152, PGS000025: 1.725744316, PGS000035: 140.3257 };
+  for (const published of scoreModels) {
+    for (const build of ['GRCh37', 'GRCh38'] as const) {
+      const eligible = published.variants.filter((m: ScoreVariant) => !m.strandAmbiguous && !m.referenceIssue);
+      const calls = eligible.map(m => ({ rsid: m.rsid, chromosome: m.chromosome, position: m.positions[build], genotype: m.effectAllele + m.otherAllele }));
+      const actual = score(calls, build, published.variants);
+      assert.equal(actual.observedCount, eligible.length);
+      assert.equal(actual.contributions.length, published.variants.length);
+      assert.ok(Math.abs(actual.subtotal! - eligible.reduce((sum, m) => sum + m.weight, 0)) < 1e-11);
+      assert.equal(actual.score, null);
+      assert.ok(actual.contributions.every(row => row.dosage === null || row.dosage === 1));
+      const patterned = published.variants.filter((m: ScoreVariant) => !m.referenceIssue).map(m => {
+        const dosage = published.variants.indexOf(m) % 3;
+        return { rsid: m.rsid, chromosome: m.chromosome, position: m.positions[build], genotype: m.effectAllele.repeat(dosage) + m.otherAllele.repeat(2 - dosage) };
+      });
+      assert.ok(Math.abs(score(patterned, build, published.variants).subtotal! - decimalSubtotals[published.id]) < 1e-12, published.id);
+    }
+  }
   assert.equal(score(calls.slice(1), 'GRCh37', reference.variants).score, null);
   // Python Decimal over original TSV weights, independently computed with repeating dosages 0/1/2.
   assert.ok(Math.abs(score(generateBenchmarkSampleVariants().variants, 'GRCh37', reference.variants).subtotal! - 1.624445643430843162) < 1e-14);

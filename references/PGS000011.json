@@ -1,0 +1,431 @@
+{
+  "id": "PGS000011",
+  "name": "GRS50",
+  "ftp_scoring_file": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000011/ScoringFiles/PGS000011.txt.gz",
+  "ftp_harmonized_scoring_files": {
+    "GRCh37": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000011/ScoringFiles/Harmonized/PGS000011_hmPOS_GRCh37.txt.gz"
+    },
+    "GRCh38": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000011/ScoringFiles/Harmonized/PGS000011_hmPOS_GRCh38.txt.gz"
+    }
+  },
+  "publication": {
+    "id": "PGP000004",
+    "title": "Risk prediction by genetic risk scores for coronary heart disease is independent of self-reported family history.",
+    "doi": "10.1093/eurheartj/ehv462",
+    "PMID": 26392438,
+    "journal": "Eur Heart J",
+    "firstauthor": "Tada H",
+    "date_publication": "2015-09-20"
+  },
+  "matches_publication": true,
+  "samples_variants": [
+    {
+      "sample_number": 41975,
+      "sample_cases": 11202,
+      "sample_controls": 30773,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": null,
+      "ancestry_additional": null,
+      "source_GWAS_catalog": null,
+      "source_PMID": 21966275,
+      "source_DOI": null,
+      "cohorts": [
+        {
+          "name_short": "PennCATH",
+          "name_full": "PennCATH",
+          "name_others": null
+        },
+        {
+          "name_short": "ARIC",
+          "name_full": "Atherosclerosis Risk in Communities Study",
+          "name_others": null
+        },
+        {
+          "name_short": "BHF-FHS",
+          "name_full": "British Heart Foundation Family Heart Study",
+          "name_others": null
+        },
+        {
+          "name_short": "BLOODOMICS",
+          "name_full": "Bloodomics project",
+          "name_others": null
+        },
+        {
+          "name_short": "MONICA",
+          "name_full": "Monitoring of Trends and Determinants in Cardiovascular Disease",
+          "name_others": null
+        },
+        {
+          "name_short": "CARDIA",
+          "name_full": "Coronary Artery Risk Development in Young Adults",
+          "name_others": null
+        },
+        {
+          "name_short": "CHS",
+          "name_full": "Cardiovascular Health Study",
+          "name_others": null
+        },
+        {
+          "name_short": "KORA",
+          "name_full": "Cooperative Health Research in the Region of Augsburg",
+          "name_others": "KORA F3, KORA F4, KORA S3, KORA S4"
+        },
+        {
+          "name_short": "PROCARDIS",
+          "name_full": "Precocious Coronary Artery Disease Study",
+          "name_others": null
+        },
+        {
+          "name_short": "FOS",
+          "name_full": "Framingham Offspring Study",
+          "name_others": null
+        }
+      ],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 8653,
+      "sample_cases": 4394,
+      "sample_controls": 4259,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "South Asian",
+      "ancestry_free": null,
+      "ancestry_country": null,
+      "ancestry_additional": null,
+      "source_GWAS_catalog": null,
+      "source_PMID": 21966275,
+      "source_DOI": null,
+      "cohorts": [
+        {
+          "name_short": "PROMIS",
+          "name_full": "The Pakistan Risk Of Myocardial Infarction Study",
+          "name_others": null
+        },
+        {
+          "name_short": "LOLIPOP",
+          "name_full": "London Life Sciences Population Study",
+          "name_others": null
+        }
+      ],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 194427,
+      "sample_cases": 63746,
+      "sample_controls": 130681,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European, South Asian",
+      "ancestry_free": null,
+      "ancestry_country": null,
+      "ancestry_additional": null,
+      "source_GWAS_catalog": null,
+      "source_PMID": 23202125,
+      "source_DOI": null,
+      "cohorts": [
+        {
+          "name_short": "HPS",
+          "name_full": "Heart Protection Study",
+          "name_others": null
+        },
+        {
+          "name_short": "HSIEA",
+          "name_full": "The Hellenic study of Interactions between SNPs & Eating in Atherosclerosis",
+          "name_others": null
+        },
+        {
+          "name_short": "ITH",
+          "name_full": "INTERHEART Study",
+          "name_others": null
+        },
+        {
+          "name_short": "METSIM",
+          "name_full": "Metabolic Syndrome In Men",
+          "name_others": null
+        },
+        {
+          "name_short": "MORGAM",
+          "name_full": "MOnica Risk, Genetics, Archiving and Monograph",
+          "name_others": null
+        },
+        {
+          "name_short": "PIVUS",
+          "name_full": "Prospective Investigation of the Vasculature in Uppsala Seniors",
+          "name_others": null
+        },
+        {
+          "name_short": "PMB",
+          "name_full": "Penn Medicine Biobank",
+          "name_others": null
+        },
+        {
+          "name_short": "POPGEN",
+          "name_full": "The Population Genetic Cohort",
+          "name_others": null
+        },
+        {
+          "name_short": "SCARFSHEEP",
+          "name_full": "SCARFSHEEP",
+          "name_others": null
+        },
+        {
+          "name_short": "STR",
+          "name_full": "Swedish Twin Registry",
+          "name_others": null
+        },
+        {
+          "name_short": "ULSAM",
+          "name_full": "Uppsala Longitudinal Study of Adult Men",
+          "name_others": null
+        },
+        {
+          "name_short": "EPIC",
+          "name_full": "European Prospective Investigation into Cancer",
+          "name_others": null
+        },
+        {
+          "name_short": "ADVANCE",
+          "name_full": "Atherosclerotic Disease, Vascular function, and Genetic Epidemiology",
+          "name_others": null
+        },
+        {
+          "name_short": "LURIC",
+          "name_full": "Ludwigshafen Risk and Cardiovascular Health",
+          "name_others": null
+        },
+        {
+          "name_short": "OHGS",
+          "name_full": "Ottawa Heart Genomics Study",
+          "name_others": null
+        },
+        {
+          "name_short": "WTCCC",
+          "name_full": "Wellcome Trust Case Control Consortium",
+          "name_others": null
+        },
+        {
+          "name_short": "PROCARDIS",
+          "name_full": "Precocious Coronary Artery Disease Study",
+          "name_others": null
+        },
+        {
+          "name_short": "PROMIS",
+          "name_full": "The Pakistan Risk Of Myocardial Infarction Study",
+          "name_others": null
+        },
+        {
+          "name_short": "LOLIPOP",
+          "name_full": "London Life Sciences Population Study",
+          "name_others": null
+        },
+        {
+          "name_short": "AMC-PAS",
+          "name_full": "Osteoporosis Clinic of Asan Medical Center",
+          "name_others": null
+        },
+        {
+          "name_short": "Angio-Lueb",
+          "name_full": "Luebeck Angiographic Study",
+          "name_others": null
+        },
+        {
+          "name_short": "CARDIOGENICS",
+          "name_full": "Cardiogenics Study",
+          "name_others": null
+        },
+        {
+          "name_short": "COROGENE",
+          "name_full": "COROGENE: International Studies of Infarct Survival",
+          "name_others": null
+        },
+        {
+          "name_short": "DILGOM",
+          "name_full": "Lifestyle and Genetic determinants of Obesity and Metabolic syndrome study",
+          "name_others": null
+        },
+        {
+          "name_short": "Duke",
+          "name_full": "Duke Clinic",
+          "name_others": null
+        },
+        {
+          "name_short": "EGCUT",
+          "name_full": "Estonian Genome Center of the University of Tartu",
+          "name_others": null
+        },
+        {
+          "name_short": "EMIL",
+          "name_full": "EMIL",
+          "name_others": null
+        },
+        {
+          "name_short": "FGENTCARD",
+          "name_full": "Functional genomic diagnostic tools for coronary artery disease",
+          "name_others": null
+        },
+        {
+          "name_short": "FINCAVAS",
+          "name_full": "Finnish Cardiovascular Study",
+          "name_others": null
+        },
+        {
+          "name_short": "FRISCII",
+          "name_full": "FRISCII",
+          "name_others": null
+        },
+        {
+          "name_short": "GENRIC",
+          "name_full": "Genomics Research in Cardiovascular Disease",
+          "name_others": null
+        },
+        {
+          "name_short": "GLACIER",
+          "name_full": "Gene-Lifestyle interactions And Complex traits Involved in Elevated disease Risk Study",
+          "name_others": null
+        },
+        {
+          "name_short": "GoDARTS",
+          "name_full": "Genetics of diabetes Audit and Research",
+          "name_others": null
+        },
+        {
+          "name_short": "KORA",
+          "name_full": "Cooperative Health Research in the Region of Augsburg",
+          "name_others": "KORA F3, KORA F4, KORA S3, KORA S4"
+        }
+      ],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 86995,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "NR",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST000998",
+      "source_PMID": 21378990,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 2520,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "Germany",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST000338",
+      "source_PMID": 19198612,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 14790,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "South Asian",
+      "ancestry_free": "India, Pakistan",
+      "ancestry_country": "U.K., Pakistan",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST000999",
+      "source_PMID": 21378988,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    },
+    {
+      "sample_number": 15682,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "Sweden, Italy, Germany, U.K.",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST000999",
+      "source_PMID": 21378988,
+      "source_DOI": null,
+      "cohorts": [],
+      "cohorts_additional": null
+    }
+  ],
+  "samples_training": [],
+  "trait_reported": "Coronary artery disease",
+  "trait_additional": null,
+  "trait_efo": [
+    {
+      "id": "MONDO_0005010",
+      "label": "coronary artery disorder",
+      "description": "Narrowing of the coronary arteries due to fatty deposits inside the arterial walls. The diagnostic criteria may include documented history of any of the following: documented coronary artery stenosis greater than or equal to 50% (by cardiac catheterization or other modality of direct imaging of the coronary arteries); previous coronary artery bypass surgery (CABG); previous percutaneous coronary intervention (PCI); previous myocardial infarction. (ACC) [NCIT: C26732]",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0005010"
+    }
+  ],
+  "method_name": "Genome-wide significant variants",
+  "method_params": "Also includes the SNPs from GRS 27 (Mega et al.; PMID:25748612)",
+  "variants_number": 50,
+  "variants_interactions": 0,
+  "variants_genomebuild": "NR",
+  "weight_type": "log(OR)",
+  "ancestry_distribution": {
+    "eval": {
+      "dist": {
+        "NR": 15.8,
+        "AFR": 10.5,
+        "AMR": 26.3,
+        "EUR": 42.1,
+        "MAE": 5.3
+      },
+      "count": 19,
+      "multi": [
+        "MAE_EUR",
+        "MAE_NR"
+      ]
+    },
+    "gwas": {
+      "dist": {
+        "EUR": 40.3,
+        "MAE": 53.3,
+        "SAS": 6.4
+      },
+      "count": 365042,
+      "multi": [
+        "MAE_EUR",
+        "MAE_SAS"
+      ]
+    }
+  },
+  "date_release": "2019-10-14",
+  "license": "PGS obtained from the Catalog should be cited appropriately, and used in accordance with any licensing restrictions set by the authors. See EBI Terms of Use (https://www.ebi.ac.uk/about/terms-of-use/) for additional details."
+}

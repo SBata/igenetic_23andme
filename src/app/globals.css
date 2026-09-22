@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light; --ink: #20322e; --muted: #52645e; --paper: #fafbf8; --line: #c7d1c9; --accent: #205c49; }
+:root { color-scheme: light; --ink: #192d37; --muted: #52636a; --paper: #f3f5f4; --line: #cbd4d5; --accent: #17605b; --higher: #9c3d22; --lower: #17605b; }
 * { box-sizing: border-box; }
 body { margin: 0; color: var(--ink); background: var(--paper); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.65; }
 h1, h2, h3, p { margin: 0; }
@@ -26,7 +26,7 @@ code { font-size: .93em; overflow-wrap: anywhere; }
 .score-value { font-size: 2rem; font-variant-numeric: tabular-nums; }
 .app-shell { min-height: 100vh; display: flex; flex-direction: column; }
 .site-header { background: white; border-bottom: 1px solid var(--line); }
-.header-inner, main { max-width: 1080px; width: 100%; margin: 0 auto; padding: 0 28px; }
+.header-inner, main { max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 32px; }
 .header-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; }
 .wordmark { font-family: Georgia, serif; font-size: 1.8rem; line-height: 1.1; }
 .wordmark span { display: block; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: .75rem; color: var(--muted); margin-top: 6px; }
@@ -34,6 +34,7 @@ code { font-size: .93em; overflow-wrap: anywhere; }
 nav { display: flex; gap: 5px; overflow-x: auto; padding: 3px 3px 14px; }
 nav button { border: 0; background: transparent; white-space: nowrap; font-size: .875rem; }
 nav button[aria-current] { background: #e5eee6; font-weight: 600; }
+nav button[aria-current] { color: var(--accent); background: #e5efed; box-shadow: inset 0 -3px var(--accent); border-radius: 4px 4px 0 0; }
 main { flex: 1; padding-top: 42px; padding-bottom: 60px; }
 footer { padding: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; text-align: center; }
 .stack { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
@@ -72,6 +73,89 @@ dialog::backdrop { background: rgb(24 38 30 / .5); }
 .dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .skip-link { position: absolute; top: -100px; left: 16px; z-index: 100; padding: 12px; background: white; }
 .skip-link:focus { top: 12px; }
+.workspace-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 12px; }
+.workspace-heading h1 { font-family: inherit; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 650; letter-spacing: -.045em; margin-bottom: 10px; }
+.library-count { flex-shrink: 0; color: var(--muted); font-size: .875rem; }
+.score-layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 36px; align-items: start; }
+.model-browser { display: flex; flex-direction: column; gap: 8px; }
+.model-browser h2 { padding: 0 14px 10px; font-size: .9rem; color: var(--muted); }
+.model-browser > button { display: flex; flex-direction: column; text-align: left; gap: 5px; padding: 16px; background: transparent; border-color: transparent; border-radius: 8px; line-height: 1.4; }
+.model-browser > button:hover { background: #e5eceb; }
+.model-browser > button[aria-pressed=true] { border-color: #17605b; background: white; box-shadow: 0 2px 5px rgb(25 45 55 / .07); }
+.model-browser > button > span { color: var(--muted); font-size: .8rem; }
+.model-browser > button strong { font-size: 1rem; font-weight: 650; }
+.model-category { margin-bottom: 2px; }
+.mini-coverage { display: block; height: 4px; width: 100%; background: #d7dfdd; margin-top: 8px; overflow: hidden; border-radius: 2px; }
+.mini-coverage > span { display: block; height: 100%; background: var(--accent); }
+.library-note { margin: 16px 14px 0; font-size: .83rem; line-height: 1.6; }
+.score-content { padding: 30px; background: white; border: 1px solid var(--line); border-radius: 12px; gap: 26px; }
+.trait-heading { display: flex; flex-direction: column; gap: 10px; }
+.trait-heading h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 650; letter-spacing: -.03em; line-height: 1.2; }
+.trait-heading p { color: var(--muted); font-size: .94rem; }
+.trait-heading a { font-size: .82rem; overflow-wrap: anywhere; }
+.model-id { color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; }
+.score-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; background: var(--ink); color: white; border-radius: 8px; padding: 26px; }
+.score-summary h3 { font-size: .9rem; font-weight: 500; }
+.score-summary .score-value { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 600; line-height: 1.2; margin: 12px 0; letter-spacing: -.03em; overflow-wrap: anywhere; }
+.score-summary p:not(.score-value), .coverage-heading > span { color: #d4e1e3; font-size: .8rem; }
+.coverage { align-self: center; }
+.coverage-heading { display: flex; flex-direction: column; gap: 2px; }
+.coverage-heading strong { font-size: 1.8rem; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.coverage-heading strong span { color: #d4e1e3; font-size: 1.2rem; font-weight: 400; }
+.coverage progress { display: block; height: 7px; border: 0; border-radius: 4px; margin: 15px 0 12px; background: #536971; accent-color: #9cd4c4; }
+.coverage progress::-webkit-progress-bar { background: #536971; border-radius: 4px; }
+.coverage progress::-webkit-progress-value { background: #9cd4c4; border-radius: 4px; }
+.coverage progress::-moz-progress-bar { background: #9cd4c4; }
+.interpretation-note { color: var(--muted); font-size: .87rem; line-height: 1.65; }
+.contribution-overview { padding-block: 24px; border-block: 1px solid var(--line); }
+.contribution-overview .section-heading { gap: 6px; }
+.contribution-overview .section-heading p { font-size: .82rem; }
+.effect.higher { color: var(--higher); }
+.effect.lower { color: var(--lower); }
+.effect.zero, .effect.unscored { color: var(--muted); }
+.contribution-plot { margin-top: 24px; }
+.plot-legend { display: flex; justify-content: space-between; margin: 0 86px 10px 135px; color: var(--muted); font-size: .73rem; }
+.plot-row { display: grid; grid-template-columns: 125px minmax(0, 1fr) 76px; align-items: center; gap: 10px; padding: 7px 0; }
+.plot-row code { font-size: .82rem; }
+.plot-row small { display: block; color: var(--muted); font-size: .72rem; }
+.plot-row strong { text-align: right; font-size: .82rem; font-variant-numeric: tabular-nums; }
+.plot-track { height: 29px; position: relative; background: linear-gradient(to right, transparent calc(50% - 1px), #8a989e calc(50% - 1px), #8a989e calc(50% + 1px), transparent calc(50% + 1px)); }
+.plot-bar { position: absolute; top: 5px; height: 19px; border-radius: 2px; }
+.plot-bar.higher { background: var(--higher); }
+.plot-bar.lower { background: var(--lower); }
+.plot-caption { color: var(--muted); font-size: .75rem; margin-top: 16px; }
+.variant-section { gap: 16px; }
+.variant-section .section-heading { gap: 8px; }
+.variant-section .section-heading p, .variant-section > .muted { font-size: .85rem; }
+.variant-filters { display: grid; grid-template-columns: 1fr 190px; gap: 16px; }
+.variant-filters .field { font-size: .83rem; font-weight: 600; }
+.variant-filters input, .variant-filters select { font-weight: 400; }
+.variant-table { font-size: .83rem; }
+.variant-table th, .variant-table td { padding: 18px 14px; }
+.variant-table th:first-child { width: 24%; }
+.variant-table td:last-child { width: 22%; font-variant-numeric: tabular-nums; }
+.variant-table thead { background: #eef2f1; font-size: .76rem; }
+.variant-table tbody tr:hover { background: #f7f9f8; }
+.variant-gene { display: block; font-size: .74rem; color: var(--muted); font-weight: 400; margin: 3px 0 8px; overflow-wrap: anywhere; }
+.genotype-call { display: inline-block; min-width: 34px; background: #edf1f0; border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; font-size: .8rem; }
+.cell-note { font-size: .77rem; color: var(--muted); line-height: 1.6; margin-top: 5px; }
+.more-variants { align-self: center; }
+.empty-state { padding: 20px; background: #f1f5f3; border-radius: 6px; color: var(--muted); font-size: .9rem; }
+.score-content > details { font-size: .87rem; }
+@media (max-width: 1050px) {
+  .score-layout { grid-template-columns: 195px minmax(0, 1fr); gap: 20px; }
+  .score-content { padding: 24px; }
+  .score-summary { gap: 20px; padding: 20px; }
+}
+@media (max-width: 800px) {
+  .score-layout { grid-template-columns: minmax(0, 1fr); }
+  .model-browser { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .model-browser h2, .library-note { grid-column: 1 / -1; }
+  .library-note { margin: 4px 0 0; padding: 4px 0; }
+  .model-browser > button { border-color: var(--line); background: white; padding: 12px; }
+  .model-browser > button[aria-pressed=true] { background: #e5efed; border-color: var(--accent); }
+  .workspace-heading { align-items: start; flex-direction: column; gap: 8px; }
+}
 @media (max-width: 600px) {
   .header-inner, main { padding-left: 18px; padding-right: 18px; }
   main { padding-top: 28px; }
@@ -83,4 +167,21 @@ dialog::backdrop { background: rgb(24 38 30 / .5); }
   .intake-actions, .search-form { flex-direction: column; align-items: stretch; }
   th, td { padding: 12px; }
   table { font-size: .82rem; }
+  .score-content { padding: 20px 16px; border-radius: 8px; }
+  .score-summary { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .coverage { border-top: 1px solid #536971; padding-top: 18px; }
+  .score-summary .score-value { font-size: 2.3rem; }
+  .coverage-heading { flex-direction: row; align-items: baseline; gap: 12px; }
+  .variant-filters { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .variant-table, .variant-table tbody { display: block; width: 100%; }
+  .variant-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .variant-table tbody tr { display: grid; grid-template-columns: 100px minmax(0, 1fr); border-bottom: 1px solid var(--line); padding: 16px 10px; gap: 10px; }
+  .variant-table tbody tr:last-child { border-bottom: 0; }
+  .variant-table th:first-child { width: auto; grid-row: span 2; }
+  .variant-table td:last-child { width: auto; grid-column: 2; }
+  .variant-table th, .variant-table td { padding: 0; border: 0; }
+  .variant-table td:last-child .cell-note { display: inline; margin-left: 8px; }
+  .plot-row { grid-template-columns: 99px minmax(0, 1fr) 64px; gap: 6px; }
+  .plot-row code, .plot-row strong { font-size: .72rem; }
+  .plot-legend { margin: 0 0 10px; }
 }

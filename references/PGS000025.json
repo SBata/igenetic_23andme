@@ -1,0 +1,172 @@
+{
+  "id": "PGS000025",
+  "name": "GRS",
+  "ftp_scoring_file": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000025/ScoringFiles/PGS000025.txt.gz",
+  "ftp_harmonized_scoring_files": {
+    "GRCh37": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000025/ScoringFiles/Harmonized/PGS000025_hmPOS_GRCh37.txt.gz"
+    },
+    "GRCh38": {
+      "positions": "https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores/PGS000025/ScoringFiles/Harmonized/PGS000025_hmPOS_GRCh38.txt.gz"
+    }
+  },
+  "publication": {
+    "id": "PGP000015",
+    "title": "Evaluation of a Genetic Risk Score to Improve Risk Prediction for Alzheimer's Disease.",
+    "doi": "10.3233/JAD-150749",
+    "PMID": 27340842,
+    "journal": "J Alzheimers Dis",
+    "firstauthor": "Chouraki V",
+    "date_publication": "2016-06-01"
+  },
+  "matches_publication": true,
+  "samples_variants": [
+    {
+      "sample_number": 55134,
+      "sample_cases": null,
+      "sample_controls": null,
+      "sample_percent_male": null,
+      "sample_age": null,
+      "phenotyping_free": null,
+      "followup_time": null,
+      "ancestry_broad": "European",
+      "ancestry_free": null,
+      "ancestry_country": "U.S., Iceland, Netherlands, Greece, Canada, Germany, U.K., France",
+      "ancestry_additional": null,
+      "source_GWAS_catalog": "GCST002245",
+      "source_PMID": 24162737,
+      "source_DOI": null,
+      "cohorts": [
+        {
+          "name_short": "ACT",
+          "name_full": "Adult Changes in Thought",
+          "name_others": null
+        },
+        {
+          "name_short": "ADC",
+          "name_full": "Alzheimer Disease Center",
+          "name_others": null
+        },
+        {
+          "name_short": "ADNI",
+          "name_full": "Alzheimers Disease Neuroimaging Initiative",
+          "name_others": null
+        },
+        {
+          "name_short": "AGES",
+          "name_full": "Aging Gene-Environment Susceptibility - Reykjavik Study",
+          "name_others": null
+        },
+        {
+          "name_short": "CHS",
+          "name_full": "Cardiovascular Health Study",
+          "name_others": null
+        },
+        {
+          "name_short": "EADI",
+          "name_full": "EADI",
+          "name_others": null
+        },
+        {
+          "name_short": "FHS",
+          "name_full": "Framingham Heart Study",
+          "name_others": null
+        },
+        {
+          "name_short": "GERAD",
+          "name_full": "GERAD",
+          "name_others": null
+        },
+        {
+          "name_short": "GSK",
+          "name_full": "GlaxoSmithKline",
+          "name_others": null
+        },
+        {
+          "name_short": "LOAD",
+          "name_full": "Late Onset Alzheimers Disease Family Study",
+          "name_others": null
+        },
+        {
+          "name_short": "MAYO",
+          "name_full": "The Mayo Clinic study",
+          "name_others": "MAYO clinic biobank"
+        },
+        {
+          "name_short": "MIRAGE",
+          "name_full": "MIRAGE",
+          "name_others": null
+        },
+        {
+          "name_short": "OHSU",
+          "name_full": "Oregon Health Science University",
+          "name_others": null
+        },
+        {
+          "name_short": "ROSMAP",
+          "name_full": "Religious Orders Study and Rush Memory and Aging Project",
+          "name_others": null
+        },
+        {
+          "name_short": "RS",
+          "name_full": "Rotterdam Study",
+          "name_others": "Rotterdam Study I, Rotterdam Study II"
+        },
+        {
+          "name_short": "TGEN",
+          "name_full": "Translational Genomics Research Institute",
+          "name_others": null
+        },
+        {
+          "name_short": "UMVUMSS",
+          "name_full": "UMVUMSS",
+          "name_others": null
+        },
+        {
+          "name_short": "UPITT",
+          "name_full": "Cancer Family Registry, University of Pittsburg",
+          "name_others": null
+        },
+        {
+          "name_short": "WASHU",
+          "name_full": "University of Washington",
+          "name_others": null
+        }
+      ],
+      "cohorts_additional": null
+    }
+  ],
+  "samples_training": [],
+  "trait_reported": "Alzheimer's disease",
+  "trait_additional": null,
+  "trait_efo": [
+    {
+      "id": "MONDO_0004975",
+      "label": "Alzheimer disease",
+      "description": "A progressive, neurodegenerative disease characterized by loss of function and death of nerve cells in several areas of the brain leading to loss of cognitive function such as memory and language. [NCIT: P378]",
+      "url": "http://purl.obolibrary.org/obo/MONDO_0004975"
+    }
+  ],
+  "method_name": "log-OR weighted sum of risk allele dosages",
+  "method_params": "Top SNP in each locus (+- 500kb around top SNP) reaching genome-wide significance, excluding APOE. Recoded the odds ratios (OR) from the IGAP meta-analysis so they would all indicate an increased risk of AD and used the log(OR)and corresponding alleles to compute a weighted sum of risk allele dosages. applied an additional transformation so that one unit of the GRS would be interpreted as one additional\nrisk allele.",
+  "variants_number": 19,
+  "variants_interactions": 0,
+  "variants_genomebuild": "GRCh37",
+  "weight_type": "NR",
+  "ancestry_distribution": {
+    "eval": {
+      "dist": {
+        "EUR": 100
+      },
+      "count": 3
+    },
+    "gwas": {
+      "dist": {
+        "EUR": 100
+      },
+      "count": 55134
+    }
+  },
+  "date_release": "2019-10-14",
+  "license": "PGS obtained from the Catalog should be cited appropriately, and used in accordance with any licensing restrictions set by the authors. See EBI Terms of Use (https://www.ebi.ac.uk/about/terms-of-use/) for additional details."
+}
